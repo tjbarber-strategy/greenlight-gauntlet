@@ -224,7 +224,16 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 
 </style>
 </head>
-<body>
+<body><div id="auth-gate" style="position:fixed;inset:0;z-index:9999;background:#0c0e12;display:flex;align-items:center;justify-content:center;font-family:sans-serif;">
+<div style="text-align:center;">
+<h2 style="color:#34d399;margin-bottom:16px;font-size:1.2rem;">Greenlight Strategic Gauntlet</h2>
+<p style="color:#c8cdd6;margin-bottom:16px;font-size:0.85rem;">Enter password to view</p>
+<input id="pw" type="password" placeholder="Password" style="padding:10px 16px;border-radius:6px;border:1px solid #232830;background:#14171e;color:#fff;font-size:1rem;width:240px;" onkeydown="if(event.key==='Enter')checkPw()">
+<br><button onclick="checkPw()" style="margin-top:12px;padding:10px 24px;border-radius:6px;border:none;background:#34d399;color:#0c0e12;font-weight:700;cursor:pointer;">Enter</button>
+<p id="pw-err" style="color:#f87171;margin-top:8px;font-size:0.8rem;display:none;">Wrong password</p>
+</div></div>
+<script>function checkPw(){if(document.getElementById("pw").value==="greenlight2026"){document.getElementById("auth-gate").remove()}else{document.getElementById("pw-err").style.display="block"}}</script>
+
 
 <!-- HERO -->
 <div class="hero">
