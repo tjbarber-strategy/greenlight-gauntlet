@@ -131,6 +131,97 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
 .kpi-label { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
 .status-red { color: var(--danger) !important; font-weight: 700; }
+
+/* ===== AD CARDS ===== */
+.ad-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+}
+.ad-card {
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s, transform 0.15s;
+}
+.ad-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+.ad-rank {
+    position: absolute;
+    top: 8px; left: 8px;
+    background: rgba(0,0,0,0.75);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+}
+.ad-media {
+    aspect-ratio: 4/5;
+    max-height: 220px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.ad-media video, .ad-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.ad-media video { background: #000; }
+.media-error {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 40px 12px;
+}
+.ad-info {
+    padding: 10px 12px;
+}
+.ad-name {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ad-rating {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+.ad-rating.win { background: rgba(52,211,153,0.15); color: var(--win); }
+.ad-rating.hit { background: rgba(96,165,250,0.15); color: var(--hit); }
+.ad-rating.fail { background: rgba(156,163,175,0.1); color: var(--fail); }
+.ad-rating.testing { background: rgba(251,191,36,0.1); color: var(--warn); }
+.ad-metrics {
+    display: flex; flex-wrap: wrap; gap: 8px;
+}
+.metric {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+}
+.metric b { color: var(--text-bright); }
+@media (max-width: 900px) {
+    .ad-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 500px) {
+    .ad-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 </style>
 </head>
 <body>
@@ -157,6 +248,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 <button class="nav-btn" onclick="showPage('portfolio')">Synthesized Portfolio</button>
 <button class="nav-btn" onclick="showPage('gaps')">Gaps Table</button>
 <button class="nav-btn" onclick="showPage('competitors')">Competitors</button>
+<button class="nav-btn" onclick="showPage('adlib')">Ad Library</button>
 <button class="nav-btn" onclick="showPage('research')">Consumer Research</button>
 <button class="nav-btn" onclick="showPage('client')">Client Context</button>
 </div>
@@ -192,6 +284,115 @@ Greenlight is a $1.42M/month L30 account where TubeScience is losing. TS contrib
 </div>
 
 </div></div></div>
+<h4>Top 10 Ads — L30 ($1.42M window)</h4>
+<div class="ad-grid"><div class="ad-card">
+<div class="ad-rank">#1</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_3265745153584845.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_ProudKidMoment_UgcChildPov_UgcChildPov-Ss2-Hp">20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$170K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#2</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_3939247783041095.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_ProudKidMoment_UgcChildPov_UgcChildPov-Ss2-Hp">20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$168K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#3</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_2000514670815315.jpg" loading="lazy" alt="010526__NRTV__GRL82-C__New__Static__Debit__Partnership-..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="010526__NRTV__GRL82-C__New__Static__Debit__Partnership-Gavinmamasboy__UGCStatic__SignUps__Format">010526__NRTV__GRL82-C__New__Static__Debit__Partnership-...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$131K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#4</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1255159019870621.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260127_B|Core|Nrtv-Grl103|Video_Terinhumphrey_Parents_Evergreen|Empowerment_Credibility_MultikidBroll_BRollChildren_BRollChildren-Ss2-Hp">20260127_B|Core|Nrtv-Grl103|Video_Terinhumphrey_Parents...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$101K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#5</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1425083292105316.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_V04|Core|Glc-157|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_ProudKidMoment_BRollFamily_BRollFamily-Ss3-Exploretest">20260316_V04|Core|Glc-157|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$87K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#6</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1254559882769996.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V05|Core|Glc-93|Video_Gl_Parents_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V05|Core|Glc-93|Video_Gl_Parents_Evergreen|Coo...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$81K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#7</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1191517786082564.jpg" loading="lazy" alt="20260211_V01|Core|Tube-450|Static_Smartmoneymama_Parent..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260211_V01|Core|Tube-450|Static_Smartmoneymama_Parents_Evergreen|Empowerment_ProblemSolution_Alert_BRollChildren_BRollChildren-Ss1-Exploretest_StaticTS">20260211_V01|Core|Tube-450|Static_Smartmoneymama_Parent...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$75K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#8</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_792866046915574.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_V02|Core|Glc-157|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_ProudKidMoment_BRollFamily_BRollFamily-Ss2-Exploretest">20260316_V02|Core|Glc-157|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$35K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#9</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1455338922655220.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_V04|Core|Glc-157|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_ProudKidMoment_BRollFamily_BRollFamily-Ss3-Exploretest">20260318_V04|Core|Glc-157|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$30K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#10</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1441709430892664.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="J-53,J53V1B_Adapt1_P1Core-SW1BroadBenefits-Awareness1CA-Other-TF-INF_VideoTS_01022026">J-53,J53V1B_Adapt1_P1Core-SW1BroadBenefits-Awareness1CA...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$27K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div></div>
+
 <div class="collapse-section">
 <div class="collapse-header" onclick="toggleCollapse(this)">
 <h3>What's Working and Why <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
@@ -636,6 +837,2071 @@ Greenlight is a $1.42M/month L30 account where TubeScience is losing. TS contrib
 <div class="gap-evidence">2-3 weeks missed activations in Dec. Jason sole reviewer. — Partially resolved — Alex can review low-risk.</div>
 </div>
 </div>
+</div></div>
+
+
+<div class="page-section" id="page-adlib">
+<div class="output-section">
+<div class="output-label">Reference</div>
+<div class="output-title">Ad Library</div>
+<p style="color:var(--text-dim); margin-bottom:16px; font-size:0.85rem;">Playable ad assets with S3 links. Click any video to play. L30 sorted by spend; Lifetime sorted by all-time spend.</p>
+
+<div class="tab-bar">
+<button class="tab-btn active" onclick="showTab('adlib-l30', this)">L30 Portfolio (100 ads)</button>
+<button class="tab-btn" onclick="showTab('adlib-lifetime', this)">Lifetime Top 100</button>
+</div>
+
+<div class="tab-content active" id="tab-adlib-l30">
+<div class="ad-grid"><div class="ad-card">
+<div class="ad-rank">#1</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_3265745153584845.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_ProudKidMoment_UgcChildPov_UgcChildPov-Ss2-Hp">20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$170K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#2</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_3939247783041095.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_ProudKidMoment_UgcChildPov_UgcChildPov-Ss2-Hp">20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$168K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#3</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_2000514670815315.jpg" loading="lazy" alt="010526__NRTV__GRL82-C__New__Static__Debit__Partnership-..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="010526__NRTV__GRL82-C__New__Static__Debit__Partnership-Gavinmamasboy__UGCStatic__SignUps__Format">010526__NRTV__GRL82-C__New__Static__Debit__Partnership-...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$131K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#4</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1255159019870621.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260127_B|Core|Nrtv-Grl103|Video_Terinhumphrey_Parents_Evergreen|Empowerment_Credibility_MultikidBroll_BRollChildren_BRollChildren-Ss2-Hp">20260127_B|Core|Nrtv-Grl103|Video_Terinhumphrey_Parents...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$101K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#5</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1425083292105316.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_V04|Core|Glc-157|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_ProudKidMoment_BRollFamily_BRollFamily-Ss3-Exploretest">20260316_V04|Core|Glc-157|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$87K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#6</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1254559882769996.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V05|Core|Glc-93|Video_Gl_Parents_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V05|Core|Glc-93|Video_Gl_Parents_Evergreen|Coo...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$81K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#7</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1191517786082564.jpg" loading="lazy" alt="20260211_V01|Core|Tube-450|Static_Smartmoneymama_Parent..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260211_V01|Core|Tube-450|Static_Smartmoneymama_Parents_Evergreen|Empowerment_ProblemSolution_Alert_BRollChildren_BRollChildren-Ss1-Exploretest_StaticTS">20260211_V01|Core|Tube-450|Static_Smartmoneymama_Parent...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$75K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#8</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_792866046915574.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_V02|Core|Glc-157|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_ProudKidMoment_BRollFamily_BRollFamily-Ss2-Exploretest">20260316_V02|Core|Glc-157|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$35K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#9</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1455338922655220.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_V04|Core|Glc-157|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_ProudKidMoment_BRollFamily_BRollFamily-Ss3-Exploretest">20260318_V04|Core|Glc-157|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$30K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#10</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1441709430892664.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="J-53,J53V1B_Adapt1_P1Core-SW1BroadBenefits-Awareness1CA-Other-TF-INF_VideoTS_01022026">J-53,J53V1B_Adapt1_P1Core-SW1BroadBenefits-Awareness1CA...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$27K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#11</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1459140725836501.jpg" loading="lazy" alt="010526__NRTV__GRL82-A__New__Static__Debit__Partnership-..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="010526__NRTV__GRL82-A__New__Static__Debit__Partnership-Gavinmamasboy__UGCStatic__SignUps__Format">010526__NRTV__GRL82-A__New__Static__Debit__Partnership-...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$21K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero - Short-Fo</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#12</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1847768635923160.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_A|Core|Nrtv-Grl129|Video_Gl_Parents_Evergreen|Empowerment_Credibility_ParentChildBRoll_BRollFamily-Ss2-Hp">20260318_A|Core|Nrtv-Grl129|Video_Gl_Parents_Evergreen|...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$21K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#13</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1260100806063893.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_C|Core|Nrtv-Grl123.1Ho|Video_Gl_Parents_Evergreen|Empowerment_Testimonial_ParentTestimonial_UgcParentPov_UgcParentPov-Ss2-Hp">20260316_C|Core|Nrtv-Grl123.1Ho|Video_Gl_Parents_Evergr...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$20K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#14</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1301282765146625.jpg" loading="lazy" alt="20260209_J64V1D|Core|Tube-64|Static_Smartmoneymama_Pare..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260209_J64V1D|Core|Tube-64|Static_Smartmoneymama_Parents_Evergreen|Empowerment_ProblemSolution_Wot_UgcParentPov_UgcParentPov-Ss2-Hp_StaticTS">20260209_J64V1D|Core|Tube-64|Static_Smartmoneymama_Pare...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$20K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#15</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_2124467644984808.jpg" loading="lazy" alt="20262003_V01|Core| - Allowance" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20262003_V01|Core| - Allowance">20262003_V01|Core| - Allowance</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$17K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#16</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_874497415234551.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="J6V1A_Adapt2_AntiReasons-MoF_VideoTS_WL-SMM_10022025">J6V1A_Adapt2_AntiReasons-MoF_VideoTS_WL-SMM_10022025</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$17K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#17</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_2926221910915369.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J75V1B|Core|Tube-75|Video_SmartMoneyMama_Dads_Evergreen|Empowerment_StoryTelling_Ugc_BRollChildren_BRollChildren-Ss1-Hp_VideoTS">20260202_J75V1B|Core|Tube-75|Video_SmartMoneyMama_Dads_...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$16K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#18</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1820964281868748.jpg" loading="lazy" alt="J10V1C_Adapt3_Static-UrgencyVisuals-ToF_StaticTS_WL-SMM..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="J10V1C_Adapt3_Static-UrgencyVisuals-ToF_StaticTS_WL-SMM_10302025">J10V1C_Adapt3_Static-UrgencyVisuals-ToF_StaticTS_WL-SMM...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$13K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · BRAND · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#19</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120242526661250546.jpg" loading="lazy" alt="20262003_V01|Core| - FatherKid" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20262003_V01|Core| - FatherKid">20262003_V01|Core| - FatherKid</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$13K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero - Short-Fo</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#20</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_924308696834439.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260126_V01|Core|Glc-108|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_Broll_ParentChildGroup_ParentChildGroup-Ss2-hp">20260126_V01|Core|Glc-108|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$12K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#21</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_2912773742447128.jpg" loading="lazy" alt="010526__NRTV__GRL82-D__New__Static__Debit__Partnership-..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="010526__NRTV__GRL82-D__New__Static__Debit__Partnership-Gavinmamasboy__UGCStatic__SignUps__Format">010526__NRTV__GRL82-D__New__Static__Debit__Partnership-...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$11K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#22</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1210764060437374.jpg" loading="lazy" alt="010526__NRTV__GRL82-B__New__Static__Debit__Partnership-..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="010526__NRTV__GRL82-B__New__Static__Debit__Partnership-Gavinmamasboy__UGCStatic__SignUps__Format">010526__NRTV__GRL82-B__New__Static__Debit__Partnership-...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$11K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#23</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_946688904413715.jpg" loading="lazy" alt="A-139__v1__New__Static__Debit__Learning__UGCStatic__Sig..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="A-139__v1__New__Static__Debit__Learning__UGCStatic__SignUps__Format__New__LP-GL">A-139__v1__New__Static__Debit__Learning__UGCStatic__Sig...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$10K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · BRAND · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#24</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_723154864188455.jpg" loading="lazy" alt="J-45,J45V1A_More3_UrgencyStaticScale_WOT_-ToF_StaticTS_..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="J-45,J45V1A_More3_UrgencyStaticScale_WOT_-ToF_StaticTS_12182025">J-45,J45V1A_More3_UrgencyStaticScale_WOT_-ToF_StaticTS_...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$10K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#25</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120240807139150546.jpg" loading="lazy" alt="20260202_V01|Core|Glc-169|Static_Gl_Parents_Evergreen|L..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_V01|Core|Glc-169|Static_Gl_Parents_Evergreen|Literacy_Testimonial_Graphics_NoHumanAppUiOnly_NoHumanAppUiOnly-Ss1-Hp">20260202_V01|Core|Glc-169|Static_Gl_Parents_Evergreen|L...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$10K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#26</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1492183169134677.jpg" loading="lazy" alt="A-139__v3__New__Static__Debit__Learning__UGCStatic__Sig..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="A-139__v3__New__Static__Debit__Learning__UGCStatic__SignUps__Format__New__LP-GL">A-139__v3__New__Static__Debit__Learning__UGCStatic__Sig...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$9K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#27</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_977105391646452.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_V02|Core|Glc-157|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_ProudKidMoment_BRollFamily_BRollFamily-Ss2-Exploretest">20260318_V02|Core|Glc-157|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$9K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#28</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_26171222099179299.jpg" loading="lazy" alt="20260310_J95V1A|Core|Tube-95|StaticTS_Gl_Parents_Evergr..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J95V1A|Core|Tube-95|StaticTS_Gl_Parents_Evergreen|Empowerment_ProblemSolution_Graphics_UgcParentPov_UgcParentPov-Ss1-Hp">20260310_J95V1A|Core|Tube-95|StaticTS_Gl_Parents_Evergr...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$9K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#29</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1687740069336149.jpg" loading="lazy" alt="20260202_J73V1A|Core|Tube-73|Static_Greenlight_Parents_..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J73V1A|Core|Tube-73|Static_Greenlight_Parents_Evergreen|Empowerment_ProblemSolution_Graphics_NoHumanAppUiOnly_NoHumanAppUiOnly-Ss1-Hp_StaticTS">20260202_J73V1A|Core|Tube-73|Static_Greenlight_Parents_...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$9K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · BRAND · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#30</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1264819085780664.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_C|Core|Nrtv-Grl123.1Ho|Video_Gl_Parents_Evergreen|Empowerment_Testimonial_ParentTestimonial_UgcParentPov_UgcParentPov-Ss2-Hp">20260318_C|Core|Nrtv-Grl123.1Ho|Video_Gl_Parents_Evergr...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$9K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#31</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_2117146765491916.jpg" loading="lazy" alt="20260209_J64V1A|Core|Tube-64|Static_Smartmoneymama_Pare..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260209_J64V1A|Core|Tube-64|Static_Smartmoneymama_Parents_Evergreen|Empowerment_ProblemSolution_Wot_UgcParentPov_UgcParentPov-Ss1-Hp_StaticTS">20260209_J64V1A|Core|Tube-64|Static_Smartmoneymama_Pare...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$8K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#32</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1252529586346231.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260305_v06|Shield|GLC-1000|Video_GL_Parents_Evergreen|Security_Direct_Graphics_Animation-SS1-FS Scam Fraud">20260305_v06|Shield|GLC-1000|Video_GL_Parents_Evergreen...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$8K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#33</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_786183750752486.jpg" loading="lazy" alt="20260310_J95V1C|Core|Tube-95|StaticTS_Gl_Parents_Evergr..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J95V1C|Core|Tube-95|StaticTS_Gl_Parents_Evergreen|Empowerment_ProblemSolution_Graphics_UgcParentPov_UgcParentPov-Ss1-Hp">20260310_J95V1C|Core|Tube-95|StaticTS_Gl_Parents_Evergr...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$7K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · BRAND · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#34</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1230748302505180.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V02|Core|Glc-184|Video_Gl_Parents_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V02|Core|Glc-184|Video_Gl_Parents_Evergreen|Co...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$7K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#35</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_2644384942600227.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J79V1B|Core|Tube-79|Carousel_Gl_Parents_Evergreen|Innovation_Testimonial_PovParent_ParentChildGroup_ParentChildGroup-Ss1-Hp_StaticTS">20260310_J79V1B|Core|Tube-79|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$7K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#36</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1415282470346811.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V02|Core|Glc-93|Video_Gl_Parents_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V02|Core|Glc-93|Video_Gl_Parents_Evergreen|Coo...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$7K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#37</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1693450188304039.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J66V1C|Core|Tube-66|Carousel_Gl_Parents_Evergreen|Empowerment_BeforeAfter_Ugc_UgcParentPov_UgcParentPov-Ss2-Hp_StaticTS">20260202_J66V1C|Core|Tube-66|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$7K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Multi-Card Carousel</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#38</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120240580973590546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260127_D|Core|Nrtv-Grl102|Video_Terinhumphrey_Parents_Evergreen|Empowerment_ProblemSolution_MultikidBroll_BRollChildren_BRollChildren-Ss2-Hp">20260127_D|Core|Nrtv-Grl102|Video_Terinhumphrey_Parents...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$7K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#39</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_898037569519028.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V03|Core|Glc-93|Video_Gl_Parents_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V03|Core|Glc-93|Video_Gl_Parents_Evergreen|Coo...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$5K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#40</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1439331191059567.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V04|Core|Glc-93|Video_Gl_Parents_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V04|Core|Glc-93|Video_Gl_Parents_Evergreen|Coo...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$5K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#41</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_908631575372802.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_VV04|Core|Glc-159|Video_Gl_Parents_Evergreen|Literacy_ListFraming_ParentChildBRoll_ParentSoloMom_ParentSoloMom-Ss2-Exploretest">20260309_VV04|Core|Glc-159|Video_Gl_Parents_Evergreen|L...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$5K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#42</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1916271683107958.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260210_D|Core|Nrtv-Grl107|Video_Gl_Parents_Evergreen|Empowerment_SocialProof_TiktokComment_BRollChildren-Ss2-Hp">20260210_D|Core|Nrtv-Grl107|Video_Gl_Parents_Evergreen|...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$5K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Organic Content Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#43</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_714577511692651.jpg" loading="lazy" alt="A-139__v5__New__Static__Debit__Learning__UGCStatic__Sig..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="A-139__v5__New__Static__Debit__Learning__UGCStatic__SignUps__Format__New__LP-GL">A-139__v5__New__Static__Debit__Learning__UGCStatic__Sig...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#44</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120241082745100546.jpg" loading="lazy" alt="20260210_A|Core|Nrtv-Grl111|Static_Gl_Parents_Evergreen..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260210_A|Core|Nrtv-Grl111|Static_Gl_Parents_Evergreen|Empowerment_SocialProof_TiktokComment_BRollChildren-Ss2-Hp">20260210_A|Core|Nrtv-Grl111|Static_Gl_Parents_Evergreen...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-PEER · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#45</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_2097497347457577.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260126_V01|Core|Glc-108|Video_Penniesplagrounds_Parents_Evergreen|Coordination_Testimonial_Broll_ParentChildGroup_ParentChildGroup-Ss2-HP">20260126_V01|Core|Glc-108|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#46</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1238788887676786.jpg" loading="lazy" alt="20260210_D|Core|Nrtv-Grl118|Static_Gl_Parents_Evergreen..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260210_D|Core|Nrtv-Grl118|Static_Gl_Parents_Evergreen|Empowerment_Credibility_SplitScreen_ParentChildGroup-Ss2-Hp">20260210_D|Core|Nrtv-Grl118|Static_Gl_Parents_Evergreen...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · ACTOR · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#47</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120242151309750546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J86V1D|Core|Tube-86|VideoTS_Gl_Parents_Evergreen|Empowerment_ProblemSolution_PovParent_UgcParentPov_UgcParentPov-Ss2-Hp">20260310_J86V1D|Core|Tube-86|VideoTS_Gl_Parents_Evergre...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#48</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1136410951849925.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J75V1C|Core|Tube-75|Video_SmartMoneyMama_Dads_Evergreen|Empowerment_StoryTelling_Ugc_BRollChildren_BRollChildren-Ss2-Hp_VideoTS">20260202_J75V1C|Core|Tube-75|Video_SmartMoneyMama_Dads_...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#49</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1218473116815437.jpg" loading="lazy" alt="A-139__v4__New__Static__Debit__Learning__UGCStatic__Sig..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="A-139__v4__New__Static__Debit__Learning__UGCStatic__SignUps__Format__New__LP-GL">A-139__v4__New__Static__Debit__Learning__UGCStatic__Sig...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero - Short-Fo</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#50</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120242526661230546.jpg" loading="lazy" alt="20262003_V01|Core| - Quote" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20262003_V01|Core| - Quote">20262003_V01|Core| - Quote</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · CUSTOMER · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#51</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_2020462855534999.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J75V1B|Core|Tube-75|Video_Eviebythedozen_Dads_Evergreen|Empowerment_StoryTelling_Ugc_BRollChildren_BRollChildren-Ss1-Hp_VideoTS">20260202_J75V1B|Core|Tube-75|Video_Eviebythedozen_Dads_...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#52</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1455091742986824.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V01|Core|Glc-184|Video_Gl_Parents_Evergreen|Coordination_QuestionBased_ParentTestimonial_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V01|Core|Glc-184|Video_Gl_Parents_Evergreen|Co...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#53</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_883348234292254.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J66V1D|Core|Tube-66|Carousel_Gl_Parents_Evergreen|Empowerment_BeforeAfter_Ugc_UgcParentPov_UgcParentPov-Ss2-Hp_StaticTS">20260202_J66V1D|Core|Tube-66|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#54</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1702167570762162.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J75V1D|Core|Tube-75|Video_SmartMoneyMama_Dads_Evergreen|Empowerment_StoryTelling_Ugc_BRollChildren_BRollChildren-Ss2-Hp_VideoTS">20260202_J75V1D|Core|Tube-75|Video_SmartMoneyMama_Dads_...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#55</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_936506702294521.jpg" loading="lazy" alt="20262003_V01|Core| - Allowance" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20262003_V01|Core| - Allowance">20262003_V01|Core| - Allowance</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#56</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_4211457709070794.jpg" loading="lazy" alt="20260209_J64V1B|Core|Tube-64|Static_Smartmoneymama_Pare..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260209_J64V1B|Core|Tube-64|Static_Smartmoneymama_Parents_Evergreen|Empowerment_ProblemSolution_Wot_UgcParentPov_UgcParentPov-Ss1-Hp_StaticTS">20260209_J64V1B|Core|Tube-64|Static_Smartmoneymama_Pare...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#57</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120243091575210546.jpg" loading="lazy" alt="20260330_J103V1A|Core|Tube-103|Static_Gl_Parents_Evergr..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260330_J103V1A|Core|Tube-103|Static_Gl_Parents_Evergreen|Innovation_ListFraming_Graphics_NoHumanAppUiOnly_NoHumanAppUiOnly-Ss1-Hp">20260330_J103V1A|Core|Tube-103|Static_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#58</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_2010104016555829.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_A|Core|Nrtv-Grl129|Video_Gl_Parents_Evergreen|Empowerment_Credibility_ParentChildBRoll_BRollFamily-Ss2-Hp">20260316_A|Core|Nrtv-Grl129|Video_Gl_Parents_Evergreen|...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#59</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1866180070716001.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260108_J58V1A|Core|Tube-58|Video_Smartmoneymama_Moms_Evergreen|Empowerment_BeforeAfter_Wot_UgcParentPov_UgcParentPov-Ss1-Hp_VideoTS">20260108_J58V1A|Core|Tube-58|Video_Smartmoneymama_Moms_...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$4K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Organic Content Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#60</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120240805175940546.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J66V1B|Core|Tube-66|Carousel_Gl_Parents_Evergreen|Empowerment_BeforeAfter_Ugc_UgcParentPov_UgcParentPov-Ss1-Hp_StaticTS">20260202_J66V1B|Core|Tube-66|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Multi-Card Carousel</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#61</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_986792737012848.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V01|Core|Glc-93|Video_Gl_Moms_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260309_V01|Core|Glc-93|Video_Gl_Moms_Evergreen|Coordi...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#62</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_822814634200468.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260323_A|Core|Nrtv-Grl141|Video_Gl_Parents_Evergreen|Literacy_Testimonial_PovChild_BRollChildren-Ss2-Hp">20260323_A|Core|Nrtv-Grl141|Video_Gl_Parents_Evergreen|...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · UGC Organic Content Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#63</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_932699185976475.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260305_J87V1D|Core|Tube-87|Video_Gl_Parents_Evergreen|Empowerment_BeforeAfter_PovParent_UgcParentPov_UgcParentPov-Ss1-Hp_VideoTS">20260305_J87V1D|Core|Tube-87|Video_Gl_Parents_Evergreen...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#64</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1575273227032819.jpg" loading="lazy" alt="20260210_A|Core|Nrtv-Grl117|Static_Gl_Parents_Evergreen..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260210_A|Core|Nrtv-Grl117|Static_Gl_Parents_Evergreen|Empowerment_Credibility_PovChild_BRollChildren-Ss2-Hp">20260210_A|Core|Nrtv-Grl117|Static_Gl_Parents_Evergreen...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#65</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1236114681182431.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_V02|Shield|Glc-70|Video_Gl_Parents_Evergreen|Security_ProblemSolution_ParentTestimonial_UgcFamily_UgcFamily-Ss1-FsScam">20260202_V02|Shield|Glc-70|Video_Gl_Parents_Evergreen|S...</div>
+<span class="ad-rating hit">HIT</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#66</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1634908910978698.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V03|Core|Glc-159|Video_Gl_Parents_Evergreen|Literacy_ListFraming_ParentChildBRoll_ParentChildGroup_ParentChildGroup-Ss2-Exploretest">20260309_V03|Core|Glc-159|Video_Gl_Parents_Evergreen|Li...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#67</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120240551235310546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260126_V02|Core|Glc-134|Video_Penniesplagrounds_Parents_Evergreen|Coordination_BeforeAfter_PovChild_ParentChildGroup_ParentChildGroup-Ss1-hp">20260126_V02|Core|Glc-134|Video_Penniesplagrounds_Paren...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#68</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_887663450942979.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_A|Core|Nrtv-Grl155|Video_Trickshotsare4Kidz_Parents_Evergreen|Empowerment_Credibility_PovChild_UgcParentPov_UgcParentPov-Ss2-Hp">20260316_A|Core|Nrtv-Grl155|Video_Trickshotsare4Kidz_Pa...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#69</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_892699937019757.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260210_B|Core|Nrtv-Grl112|Video_Gl_Parents_Evergreen|Empowerment_Testimonial_PovChild_UgcChildPov-Ss2-Hp">20260210_B|Core|Nrtv-Grl112|Video_Gl_Parents_Evergreen|...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Visual-Selling Infomercia</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#70</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1209151420717323.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V05|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_PovParent_ParentChildGroup_ParentChildGroup-Ss1-Hp">20260120_V05|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#71</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_925320206735547.jpg" loading="lazy" alt="20260209_J64V1C|Core|Tube-64|Static_Smartmoneymama_Dads..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260209_J64V1C|Core|Tube-64|Static_Smartmoneymama_Dads_Evergreen|Empowerment_ProblemSolution_Wot_UgcParentPov_UgcParentPov-Ss2-Hp_StaticTS">20260209_J64V1C|Core|Tube-64|Static_Smartmoneymama_Dads...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#72</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120240808416380546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_V01|Shield|Glc-53|Video_Gl_Parents_Evergreen|Security_Testimonial_ParentTestimonial_ParentSoloMom_ParentSoloMom-Ss1-Hp">20260202_V01|Shield|Glc-53|Video_Gl_Parents_Evergreen|S...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#73</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_2125617274916894.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260305_J87V1A|Core|Tube-87|Video_Gl_Parents_Evergreen|Empowerment_BeforeAfter_PovParent_UgcParentPov_UgcParentPov-Ss1-Hp_VideoTS">20260305_J87V1A|Core|Tube-87|Video_Gl_Parents_Evergreen...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#74</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_806859149109888.jpg" loading="lazy" alt="20260310_J95V1D|Core|Tube-95|StaticTS_Gl_Parents_Evergr..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J95V1D|Core|Tube-95|StaticTS_Gl_Parents_Evergreen|Empowerment_ProblemSolution_Graphics_UgcParentPov_UgcParentPov-Ss1-Hp">20260310_J95V1D|Core|Tube-95|StaticTS_Gl_Parents_Evergr...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · BRAND · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#75</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1303966261795124.jpg" loading="lazy" alt="20260310_J95V1B|Core|Tube-95|StaticTS_Gl_Parents_Evergr..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J95V1B|Core|Tube-95|StaticTS_Gl_Parents_Evergreen|Empowerment_ProblemSolution_Graphics_UgcParentPov_UgcParentPov-Ss1-Hp">20260310_J95V1B|Core|Tube-95|StaticTS_Gl_Parents_Evergr...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#76</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_884360294511873.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_J66V1A|Core|Tube-66|Carousel_Gl_Parents_Evergreen|Empowerment_BeforeAfter_Ugc_UgcParentPov_UgcParentPov-Ss1-Hp_StaticTS">20260202_J66V1A|Core|Tube-66|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Multi-Card Carousel</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#77</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1621826182459425.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260311_V01|Core|Glc-93|Video_Gl_Moms_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-App">20260311_V01|Core|Glc-93|Video_Gl_Moms_Evergreen|Coordi...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#78</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1456187269564151.jpg" loading="lazy" alt="20260209_J64V1E|Core|Tube-64|Static_Smartmoneymama_Moms..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260209_J64V1E|Core|Tube-64|Static_Smartmoneymama_Moms_Evergreen|Empowerment_ProblemSolution_Wot_UgcParentPov_UgcParentPov-Ss3-Hp_StaticTS">20260209_J64V1E|Core|Tube-64|Static_Smartmoneymama_Moms...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#79</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1983773285825723.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_V01|Core|Glc-103|Video_Gl_Parents_Evergreen|Coordination_ProblemSolution_Broll_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260318_V01|Core|Glc-103|Video_Gl_Parents_Evergreen|Co...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#80</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1185324883680567.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260202_V04|Shield|Glc-53|Video_Gl_Parents_Evergreen|Security_Testimonial_ParentTestimonial_ParentSoloMom_ParentSoloMom-Ss2-Hp">20260202_V04|Shield|Glc-53|Video_Gl_Parents_Evergreen|S...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#81</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1559772048779973.jpg" loading="lazy" alt="J7V1B_Adapt1_MinimalCopyBouquet-Static-ToF_StaticTS_WL-..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="J7V1B_Adapt1_MinimalCopyBouquet-Static-ToF_StaticTS_WL-SMM_10092025">J7V1B_Adapt1_MinimalCopyBouquet-Static-ToF_StaticTS_WL-...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#82</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1466814611775764.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260210_C|Core|Nrtv-Grl112|Video_Gl_Parents_Evergreen|Empowerment_Testimonial_PovChild_UgcChildPov-Ss2-Hp">20260210_C|Core|Nrtv-Grl112|Video_Gl_Parents_Evergreen|...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Visual-Selling Infomercia</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#83</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120239112099370546.jpg" loading="lazy" alt="J-45,J45V1D_More3_UrgencyStaticScale_WoT-ToF_StaticTS_1..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="J-45,J45V1D_More3_UrgencyStaticScale_WoT-ToF_StaticTS_12182025">J-45,J45V1D_More3_UrgencyStaticScale_WoT-ToF_StaticTS_1...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$3K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · BRAND · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#84</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_801537129056482.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V01|Infinity|Glc-135|Video_Gl_Parents_Evergreen|Empowerment_Testimonial_Broll_ParentChildGroup_ParentChildGroup-Ss1-Infinity">20260309_V01|Infinity|Glc-135|Video_Gl_Parents_Evergree...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#85</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1680016519830871.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260309_V04|Core|Glc-155|Video_Gl_Parents_Evergreen|Coordination_ProblemSolution_ParentChildBRoll_BRollFamily_BRollFamily-Ss2-Exploretest">20260309_V04|Core|Glc-155|Video_Gl_Parents_Evergreen|Co...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · BRAND · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#86</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1181723323670802.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="A-148_v5_Scale__Video__Debit__Learning__NUGC__SignUps__Scale__New__LP-GLA-148__Scale__Video__Debit__Learning__NUGC__SignUps__Scale__New__LP-GL">A-148_v5_Scale__Video__Debit__Learning__NUGC__SignUps__...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#87</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1559157968496268.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J79V1A|Core|Tube-79|Carousel_Gl_Parents_Evergreen|Innovation_Testimonial_PovParent_ParentChildGroup_ParentChildGroup-Ss1-Hp_StaticTS">20260310_J79V1A|Core|Tube-79|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · UGC Video Skits</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#88</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1602330247437588.jpg" loading="lazy" alt="20260209_J70V1E|Core|Tube-70|Static_Smartmoneymama_Moms..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="20260209_J70V1E|Core|Tube-70|Static_Smartmoneymama_Moms_Evergreen|Empowerment_SocialProof_Graphics_NoHumanAppUiOnly_NoHumanAppUiOnly-Ss2-Hp_StaticTS">20260209_J70V1E|Core|Tube-70|Static_Smartmoneymama_Moms...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#89</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_25998135086446869.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V02|Core|Glc-89|Video_Gl_Parents_Evergreen|Coordination_ProblemSolution_TiktokComment_ParentChildGroup_ParentChildGroup-Ss2-Hp">20260120_V02|Core|Glc-89|Video_Gl_Parents_Evergreen|Coo...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#90</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_2008557069703906.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V03|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_PovParent_ParentChildGroup_ParentChildGroup-Ss1-Hp">20260120_V03|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#91</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_801523005564913.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J79V1D|Core|Tube-79|Carousel_Gl_Parents_Evergreen|Innovation_Testimonial_Graphics_NoHumanAppUiOnly_NoHumanAppUiOnly-Ss2-Hp_StaticTS">20260310_J79V1D|Core|Tube-79|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Card Carousel</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#92</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1440124351180184.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260323_V02|Shield|Glc-189|Video_Gl_Parents_Evergreen|Security_ProblemSolution_ParentTestimonial_ParentChildGroup_ParentChildGroup-Ss1-FsScamFraud">20260323_V02|Shield|Glc-189|Video_Gl_Parents_Evergreen|...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#93</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_1302191968629016.gif" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260310_J79V1C|Core|Tube-79|Carousel_Gl_Parents_Evergreen|Innovation_Testimonial_PovParent_NoHumanAppUiOnly_NoHumanAppUiOnly-Ss2-Hp_StaticTS">20260310_J79V1C|Core|Tube-79|Carousel_Gl_Parents_Evergr...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#94</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_770970755819277.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_V01|Core|Glc-192|Video_Gl_Parents_Evergreen|Coordination_Testimonial_PovChild_ParentChildGroup_ParentChildGroup-Ss1-Exploretest">20260318_V01|Core|Glc-192|Video_Gl_Parents_Evergreen|Co...</div>
+<span class="ad-rating fail">FAIL</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#95</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1830231790973114.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260316_C|Core|Nrtv-Grl154|Video_Gl_Seniors_Evergreen|Empowerment_StoryTelling_MultikidBroll_BRollChildren_BRollChildren-Ss2-Hp">20260316_C|Core|Nrtv-Grl154|Video_Gl_Seniors_Evergreen|...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#96</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_25941025662156927.jpg" loading="lazy" alt="A-139__v2__New__Static__Debit__Learning__UGCStatic__Sig..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="A-139__v2__New__Static__Debit__Learning__UGCStatic__SignUps__Format__New__LP-GL">A-139__v2__New__Static__Debit__Learning__UGCStatic__Sig...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · BRAND · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#97</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1655410198968694.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_C|Core|Nrtv-Grl154|Video_Gl_Seniors_Evergreen|Empowerment_StoryTelling_MultikidBroll_BRollChildren_BRollChildren-Ss2-Hp">20260318_C|Core|Nrtv-Grl154|Video_Gl_Seniors_Evergreen|...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#98</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1248662267247382.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_A|Core|Nrtv-Grl155|Video_Trickshotsare4Kidz_Parents_Evergreen|Empowerment_Credibility_PovChild_UgcParentPov_UgcParentPov-Ss2-Hp">20260318_A|Core|Nrtv-Grl155|Video_Trickshotsare4Kidz_Pa...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$2K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#99</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_3394790940672690.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260325_A-152_V1_New__Static__Debit__Saving__KidSol__SignUps__Format__New__LP-GL">20260325_A-152_V1_New__Static__Debit__Saving__KidSol__S...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$566</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#100</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_910385178442186.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260318_B|Core|Nrtv-Grl50.1O|Video_Gl_Parents_Evergreen|Literacy_Credibility_POV Child_B Roll Children-Ss2-Hp">20260318_B|Core|Nrtv-Grl50.1O|Video_Gl_Parents_Evergree...</div>
+<span class="ad-rating testing">TESTING</span>
+<div class="ad-metrics"><span class="metric"><b>$462</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div></div></div>
+<div class="tab-content" id="tab-adlib-lifetime"><div class="ad-grid"><div class="ad-card">
+<div class="ad-rank">#1</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23852397920960545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 5, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 5, Q4 2022">Chelsea Etheridge, Image 5, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$1.65M</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#2</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120214273116550546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gracefulmommy, Social Native, Video 1, Q1 2024">gracefulmommy, Social Native, Video 1, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$1.34M</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#3</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/708257244980777.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="A-0 gracefulmommy, Social Native, Video 1, Q1 2024">A-0 gracefulmommy, Social Native, Video 1, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$1.10M</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#4</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120206239885590546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Bethany Crisp, LTK, Video 2, Q4 2023">Bethany Crisp, LTK, Video 2, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$1.07M</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#5</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120234554735780546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="092325__NRTV__GRL16-A__New__Video__Debit__Partnership-Gavinmamasboy__DayInLife__SignUps__Format">092325__NRTV__GRL16-A__New__Video__Debit__Partnership-G...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$930K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#6</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/283285644437080.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="The_jade_life, Video, Q3 2023">The_jade_life, Video, Q3 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$792K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#7</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120206239828760546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Bethany Crisp, LTK, Video 2, Q4 2023">Bethany Crisp, LTK, Video 2, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$755K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#8</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120206567781910546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Payphone 6s, Video, Q3 2023">Payphone 6s, Video, Q3 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$683K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · ACTOR · UGC Video Skits</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#9</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_23851253462670545.jpg" loading="lazy" alt="Koleman in driveway, Image, 1:1" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman in driveway, Image, 1:1">Koleman in driveway, Image, 1:1</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$679K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#10</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/1368918544271607.jpg" loading="lazy" alt="memorieswiththemulkeys, Social Native, Image, Q3 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="memorieswiththemulkeys, Social Native, Image, Q3 2024">memorieswiththemulkeys, Social Native, Image, Q3 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$624K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#11</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/118866471261966.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Family of Nomads, Video, Q2 2023">Family of Nomads, Video, Q2 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$592K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#12</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/1420370369129655.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="mitzi_perkins, Social Native, Video, Q1 2024">mitzi_perkins, Social Native, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$580K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#13</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23856990042310545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 7, Q2 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 7, Q2 2022">Chelsea Etheridge, Image 7, Q2 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$558K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#14</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/1110062860598129.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="lindsaytolar, Social Native, Video, Q1 2024">lindsaytolar, Social Native, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$537K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#15</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120213614446750546.jpg" loading="lazy" alt="taunialexander, Social Native, Image, Q2 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="taunialexander, Social Native, Image, Q2 2024">taunialexander, Social Native, Image, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$535K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#16</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120216218468770546.jpg" loading="lazy" alt="memorieswiththemulkeys, Social Native, Image, Q3 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="memorieswiththemulkeys, Social Native, Image, Q3 2024">memorieswiththemulkeys, Social Native, Image, Q3 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$527K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#17</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/1104599691500315.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Madina, Brand, Video, Q1 2025, ASMR">Madina, Brand, Video, Q1 2025, ASMR</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$520K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#18</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120210814000120546.jpg" loading="lazy" alt="Greenlight Photoshoot, Image 3, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Greenlight Photoshoot, Image 3, Q4 2022">Greenlight Photoshoot, Image 3, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$511K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#19</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/1241639320934892.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Madina, Brand, Video, Q1 2025, ASMR">Madina, Brand, Video, Q1 2025, ASMR</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$496K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#20</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_23853355073710545.jpg" loading="lazy" alt="Regina Gonzalez, Image 1, Q1 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Regina Gonzalez, Image 1, Q1 2022">Regina Gonzalez, Image 1, Q1 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$476K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#21</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_23857184016080545.jpg" loading="lazy" alt="Jul 18 2023, Conversions, WSJ Article" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Jul 18 2023, Conversions, WSJ Article">Jul 18 2023, Conversions, WSJ Article</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$470K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#22</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120210592446100546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Keia Jones, Brand, Video, Q1 2024">Keia Jones, Brand, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$460K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#23</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/2245942209209235.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="lindsaytolar, Social Native, Video, Q1 2024">lindsaytolar, Social Native, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$444K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#24</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23858640758870545.jpg" loading="lazy" alt="Infinity Card, Infinity, Image, Q3 2023" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Infinity Card, Infinity, Image, Q3 2023">Infinity Card, Infinity, Image, Q3 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$440K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#25</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120201752849310546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="dunnfamilyfun, TRIBE, Video, Q4 2023">dunnfamilyfun, TRIBE, Video, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$437K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#26</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120201753344240546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gall_adventures, TRIBE, Video, Q4 2023">gall_adventures, TRIBE, Video, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$434K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#27</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23857184060570545.jpg" loading="lazy" alt="Jul 18 2023, Conversions, WSJ Article" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Jul 18 2023, Conversions, WSJ Article">Jul 18 2023, Conversions, WSJ Article</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$420K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#28</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/625269223228706.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="jessilivinglovely, Social Native, Video, Q3 2024">jessilivinglovely, Social Native, Video, Q3 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$415K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#29</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_23862054409870545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 5, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 5, Q4 2022">Chelsea Etheridge, Image 5, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$408K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#30</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23852631346580545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 6, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 6, Q4 2022">Chelsea Etheridge, Image 6, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$402K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#31</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/1066594905516603.jpg" loading="lazy" alt="A-0 jans_spring, Social Native, Image, Q2 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="A-0 jans_spring, Social Native, Image, Q2 2024">A-0 jans_spring, Social Native, Image, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$364K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#32</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_23852631344800545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 6, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 6, Q4 2022">Chelsea Etheridge, Image 6, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$361K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#33</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120214273116550546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gracefulmommy, Social Native, Video 1, Q1 2024">gracefulmommy, Social Native, Video 1, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$356K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#34</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_23853355060680545.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Shavonne Samuels, Video, Q4 2021, IG Reel">Shavonne Samuels, Video, Q4 2021, IG Reel</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$350K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#35</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120214273116550546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gracefulmommy, Social Native, Video 1, Q1 2024">gracefulmommy, Social Native, Video 1, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$343K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#36</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/1368918544271607.jpg" loading="lazy" alt="memorieswiththemulkeys, Social Native, Image, Q3 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="memorieswiththemulkeys, Social Native, Image, Q3 2024">memorieswiththemulkeys, Social Native, Image, Q3 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$313K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#37</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23851263417160545.jpg" loading="lazy" alt="Koleman in driveway, Image, 1:1" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman in driveway, Image, 1:1">Koleman in driveway, Image, 1:1</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$312K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#38</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/c_2000514670815315.jpg" loading="lazy" alt="010526__NRTV__GRL82-C__New__Static__Debit__Partnership-..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="010526__NRTV__GRL82-C__New__Static__Debit__Partnership-Gavinmamasboy__UGCStatic__SignUps__Format">010526__NRTV__GRL82-C__New__Static__Debit__Partnership-...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$307K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Messaging-Hero Script-Len</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#39</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120214268967670546.jpg" loading="lazy" alt="jans_spring, Social Native, Image, Q2 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="jans_spring, Social Native, Image, Q2 2024">jans_spring, Social Native, Image, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$298K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#40</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120215218637890546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Mykhel, Promo, Greenlight, Video, Q3 2021">Mykhel, Promo, Greenlight, Video, Q3 2021</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$290K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">DEAL · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#41</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120213614905200546.jpg" loading="lazy" alt="Koleman in driveway, Image, 1:1" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman in driveway, Image, 1:1">Koleman in driveway, Image, 1:1</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$276K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#42</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23851263417160545.jpg" loading="lazy" alt="Koleman in driveway, Image, 1:1" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman in driveway, Image, 1:1">Koleman in driveway, Image, 1:1</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$275K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · CUSTOMER · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#43</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23851263417160545.jpg" loading="lazy" alt="Koleman in driveway, Image, 1:1" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman in driveway, Image, 1:1">Koleman in driveway, Image, 1:1</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$270K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#44</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120214683989590546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Samantha Matthews, Brand, Video, Q2 2024">Samantha Matthews, Brand, Video, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$270K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#45</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/816361233965171.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="mitzi_perkins, Social Native, Video, Q1 2024">mitzi_perkins, Social Native, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$269K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#46</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_3265745153584845.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_ProudKidMoment_UgcChildPov_UgcChildPov-Ss2-Hp">20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$243K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#47</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120211710686510546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Tiffany Ashley, Brand, Video, Q2 2024">Tiffany Ashley, Brand, Video, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$239K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#48</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/283285644437080.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="The_jade_life, Video, Q3 2023">The_jade_life, Video, Q3 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$232K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#49</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120233627218720546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="091025__NRTV__GRL14-A_DebitCardGoneWrong__New__Video__FS__Learning__WOT__SignUps__Format__New">091025__NRTV__GRL14-A_DebitCardGoneWrong__New__Video__F...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$230K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#50</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120205155486010546.jpg" loading="lazy" alt="Custom Card, Greenlight, Image, Q4 2023" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Custom Card, Greenlight, Image, Q4 2023">Custom Card, Greenlight, Image, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$225K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#51</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/408065195134152.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Latisha Springer, LTK, Video 1, Q4 2023">Latisha Springer, LTK, Video 1, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$224K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#52</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/1110062860598129.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="lindsaytolar, Social Native, Video, Q1 2024">lindsaytolar, Social Native, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$221K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#53</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_23853391532900545.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="LaTisha Springer, Video, Q1 2023">LaTisha Springer, Video, Q1 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$219K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#54</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1255159019870621.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260127_B|Core|Nrtv-Grl103|Video_Terinhumphrey_Parents_Evergreen|Empowerment_Credibility_MultikidBroll_BRollChildren_BRollChildren-Ss2-Hp">20260127_B|Core|Nrtv-Grl103|Video_Terinhumphrey_Parents...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$218K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#55</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120200640706280546.jpg" loading="lazy" alt="alma_shine, Image 3, Q4 2023" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="alma_shine, Image 3, Q4 2023">alma_shine, Image 3, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$217K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#56</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/1177006001110780.jpg" loading="lazy" alt="memorieswiththemulkeys, Social Native, Image, Q3 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="memorieswiththemulkeys, Social Native, Image, Q3 2024">memorieswiththemulkeys, Social Native, Image, Q3 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$217K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#57</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120236572113350546.jpg" loading="lazy" alt="J10V1C_Adapt3_Static-UrgencyVisuals-ToF_StaticTS_ASC_10..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="J10V1C_Adapt3_Static-UrgencyVisuals-ToF_StaticTS_ASC_10302025">J10V1C_Adapt3_Static-UrgencyVisuals-ToF_StaticTS_ASC_10...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$216K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · BRAND · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#58</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/1851445838611915.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="CNBC Interview, Video, Q1 2019">CNBC Interview, Video, Q1 2019</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$216K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · EXPERT · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#59</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120210592451140546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Keia Jones, Brand, Video, Q1 2024">Keia Jones, Brand, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$212K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#60</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_23852463114810545.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Brittney Fusilier, Video, Q4 2022">Brittney Fusilier, Video, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$211K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#61</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_23852397892000545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 5, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 5, Q4 2022">Chelsea Etheridge, Image 5, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$209K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#62</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120212031075000546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Ariel Tyson, Brand, Video, Q2 2024">Ariel Tyson, Brand, Video, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$207K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#63</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23853355081180545.jpg" loading="lazy" alt="Regina Gonzalez, Image 1, Q1 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Regina Gonzalez, Image 1, Q1 2022">Regina Gonzalez, Image 1, Q1 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$205K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#64</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120216218146420546.jpg" loading="lazy" alt="jans_spring, Social Native, Image, Q2 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="jans_spring, Social Native, Image, Q2 2024">jans_spring, Social Native, Image, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$200K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#65</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_23852631408530545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 6, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 6, Q4 2022">Chelsea Etheridge, Image 6, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$197K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#66</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120209285831430546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Keia Jones, Brand, Video, Q2 2024">Keia Jones, Brand, Video, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$188K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Video Skits</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#67</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120210592473900546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Keia Jones, Brand, Video, Q1 2024">Keia Jones, Brand, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$187K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#68</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120209285940870546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Keia Jones, Brand, Video, Q2 2024">Keia Jones, Brand, Video, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$184K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#69</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120210134230830546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Deal Family, Brand, Video 1, Q1 2024">Deal Family, Brand, Video 1, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$182K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Video Skits</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#70</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120204596975950546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gall_adventures, TRIBE, Video, Q4 2023">gall_adventures, TRIBE, Video, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$177K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#71</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120230003424150546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Melanie, Billo, Video, Q3 2025, Girl_WhyIClean, No Music, Overlays">Melanie, Billo, Video, Q3 2025, Girl_WhyIClean, No Musi...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$176K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-PEER · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#72</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_3939247783041095.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Empowerment_ProblemSolution_ProudKidMoment_UgcChildPov_UgcChildPov-Ss2-Hp">20260120_V02|Core|Glc-33|Video_Gl_Parents_Evergreen|Emp...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$176K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#73</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23852397920960545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 5, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 5, Q4 2022">Chelsea Etheridge, Image 5, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$170K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#74</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_23851253462680545.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Rachel Pitzel, Video 2, Q2 2022">Rachel Pitzel, Video 2, Q2 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$166K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · CELEB · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#75</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120208515068840546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Bailey Daugh, Brand, Video, Q1 2024">Bailey Daugh, Brand, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$165K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#76</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120212597903390546.jpg" loading="lazy" alt="taunialexander, Social Native, Image, Q2 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="taunialexander, Social Native, Image, Q2 2024">taunialexander, Social Native, Image, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$165K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#77</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23853355081180545.jpg" loading="lazy" alt="Regina Gonzalez, Image 1, Q1 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Regina Gonzalez, Image 1, Q1 2022">Regina Gonzalez, Image 1, Q1 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$163K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#78</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120210599649100546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Bailey Daugh, Brand, Video, Q1 2024">Bailey Daugh, Brand, Video, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$157K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#79</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/1368918544271607.jpg" loading="lazy" alt="memorieswiththemulkeys, Social Native, Image, Q3 2024" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="memorieswiththemulkeys, Social Native, Image, Q3 2024">memorieswiththemulkeys, Social Native, Image, Q3 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$156K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#80</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120214273116550546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gracefulmommy, Social Native, Video 1, Q1 2024">gracefulmommy, Social Native, Video 1, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$154K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#81</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120207907331580546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Lorelle Sherman, LTK, Video 1, Q4 2023">Lorelle Sherman, LTK, Video 1, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$153K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#82</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120201753576590546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gall_adventures, TRIBE, Video, Q4 2023">gall_adventures, TRIBE, Video, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$148K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#83</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23851263417160545.jpg" loading="lazy" alt="Koleman in driveway, Image, 1:1" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman in driveway, Image, 1:1">Koleman in driveway, Image, 1:1</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$146K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#84</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120206567920140546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Savings Goal 6s, Video, Q3 2023">Savings Goal 6s, Video, Q3 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$146K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · BRAND · Produced Infomercial Vide</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#85</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120205888040210546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman Unboxing, Video, 2019">Koleman Unboxing, Video, 2019</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$145K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#86</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23852397920960545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 5, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 5, Q4 2022">Chelsea Etheridge, Image 5, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$143K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#87</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/596679349701494.jpg" loading="lazy" alt="FS Fraud Protections, Greenlight, Image, Q2 2025, Older..." onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="FS Fraud Protections, Greenlight, Image, Q2 2025, Older Adults">FS Fraud Protections, Greenlight, Image, Q2 2025, Older...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$142K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · NO-VOICE · Messaging-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#88</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/23851259815300545.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Rachel Pitzel, Video 2, Q2 2022">Rachel Pitzel, Video 2, Q2 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$142K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#89</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1824614254834947.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="J-55,J55V1C_New_P1CoreSW1BroadBenefits-NewYearUGC-Other-MF-NewGC_VideoTS_12302025">J-55,J55V1C_New_P1CoreSW1BroadBenefits-NewYearUGC-Other...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$140K</b> spend</span> <span class="metric">ts</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#90</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120204597010690546.jpg" loading="lazy" alt="Chelsea Etheridge, Image 5, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 5, Q4 2022">Chelsea Etheridge, Image 5, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$140K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#91</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/23852397920960545.jpg" loading="lazy" alt="Chelsea Etheridge, Image 5, Q4 2022" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Chelsea Etheridge, Image 5, Q4 2022">Chelsea Etheridge, Image 5, Q4 2022</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$138K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#92</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/625269223228706.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="jessilivinglovely, Social Native, Video, Q3 2024">jessilivinglovely, Social Native, Video, Q3 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$138K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#93</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_23862054409850545.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Shavonne Samuels, Video, Q4 2021, IG Reel">Shavonne Samuels, Video, Q4 2021, IG Reel</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$136K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#94</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/120202535813360546.jpg" loading="lazy" alt="Holiday Fireplace, Haymaker, Image, Q4 2023" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Holiday Fireplace, Haymaker, Image, Q4 2023">Holiday Fireplace, Haymaker, Image, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$135K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Multi-Product Choice Stat</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#95</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120231161478940546.jpg" loading="lazy" alt="Lori, Billo, Image, Q3 2025, Debit Card UGC" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Lori, Billo, Image, Q3 2025, Debit Card UGC">Lori, Billo, Image, Q3 2025, Debit Card UGC</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$133K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#96</div>
+<div class="ad-media"><img src="https://datateam-ts-assets.s3.amazonaws.com/image_history/960403217483081/a_120233125068430546.jpg" loading="lazy" alt="Koleman in driveway, Image, 1:1" onerror="this.parentElement.innerHTML='<div class=\'media-error\'>Image unavailable</div>'"></div>
+<div class="ad-info">
+<div class="ad-name" title="Koleman in driveway, Image, 1:1">Koleman in driveway, Image, 1:1</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$131K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · NO-VOICE · Product-Hero Statics</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#97</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120206239885590546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Bethany Crisp, LTK, Video 2, Q4 2023">Bethany Crisp, LTK, Video 2, Q4 2023</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$131K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">PROBLEM · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#98</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/c_1586057739239080.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="121025__NRTV__GRL47-C__New__Video__Debit__Partnership-Saranichols2112 __ParentSol__SignUps__Format">121025__NRTV__GRL47-C__New__Video__Debit__Partnership-S...</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$130K</b> spend</span> <span class="metric">Narrative</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · UGC Testimonial Video</div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#99</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/120210967000660546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="Jon Gustin, Brand, Video, Q2 2024">Jon Gustin, Brand, Video, Q2 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$128K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · ACTOR · Product Demo Infomercial </div>
+</div>
+</div><div class="ad-card">
+<div class="ad-rank">#100</div>
+<div class="ad-media"><video controls preload="none" playsinline>
+<source src="https://datateam-ts-assets.s3.amazonaws.com/video_history/960403217483081/a_120233125068440546.mp4" type="video/mp4">
+</video></div>
+<div class="ad-info">
+<div class="ad-name" title="gracefulmommy, Social Native, Video 1, Q1 2024">gracefulmommy, Social Native, Video 1, Q1 2024</div>
+<span class="ad-rating win">WIN</span>
+<div class="ad-metrics"><span class="metric"><b>$127K</b> spend</span> <span class="metric">other</span> <span class="metric"><b>0%</b> TS</span></div>
+<div style="margin-top:4px;font-size:0.65rem;color:var(--text-dim);line-height:1.4;">OUTCOME · UGC-DEMO · Product Demo Infomercial </div>
+</div>
+</div></div></div>
 </div></div>
 
 <div class="page-section" id="page-competitors">
