@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greenlight — Strategic Gauntlet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0c0e12;
+    --bg-card: #14171e;
+    --bg-card-hover: #1a1e28;
+    --bg-section: #111419;
+    --border: #232830;
+    --border-light: #2d3340;
+    --text: #ffffff;
+    --text-dim: #c8cdd6;
+    --text-bright: #ffffff;
+    --accent: #34d399;
+    --accent-dim: #1a6b4a;
+    --warn: #fbbf24;
+    --danger: #f87171;
+    --win: #34d399;
+    --hit: #60a5fa;
+    --fail: #9ca3af;
+    --p1: #f87171;
+    --p2: #fbbf24;
+    --p3: #9ca3af;
+    --purple: #a78bfa;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; color: #ffffff !important; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: #ffffff !important; line-height: 1.65; font-size: 14.5px; }
+.nav-btn.active, .collapse-header h3, .prose h4, .tab-btn.active, h3.section-title, .ad-name, .gap-id, [style*="color:var(--accent)"] { color: var(--accent) !important; }
+.badge-high, .ad-rating.win, .conf-high { color: var(--win) !important; }
+.badge-moderate, .ad-rating.hit, .conf-mod { color: var(--hit) !important; }
+.badge-p1, .badge-critical { color: var(--danger) !important; }
+.badge-p2, .ad-rating.testing { color: var(--warn) !important; }
+.badge-new { color: var(--purple) !important; }
+.ad-rating.fail, .priority-p3 { color: var(--fail) !important; }
+.priority-p1 { color: var(--p1) !important; }
+.priority-p2 { color: var(--p2) !important; }
+.prose em, .gap-evidence, .text-dim, .nav-btn, .metric, .ad-metric-label, .tab-btn { color: #c8cdd6 !important; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.hero { background: linear-gradient(135deg, #0c0e12 0%, #0e1a14 50%, #0c0e12 100%); border-bottom: 1px solid var(--border); padding: 48px 0 40px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 50%, rgba(52,211,153,0.05) 0%, transparent 60%); }
+.hero-content { position: relative; z-index: 1; }
+.hero h1 { font-family: 'Fraunces', serif; font-size: 2.4rem; color: var(--text-bright); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.hero .subtitle { color: var(--accent); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 16px; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 20px; color: var(--text-dim); font-size: 0.82rem; }
+.hero .meta span { display: flex; align-items: center; gap: 5px; }
+.nav { position: sticky; top: 0; z-index: 100; background: rgba(12,14,18,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0; }
+.nav-inner { display: flex; overflow-x: auto; gap: 0; scrollbar-width: none; }
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-btn { background: none; border: none; color: var(--text-dim); padding: 12px 18px; font-size: 0.8rem; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 0.2s; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; }
+.nav-btn:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.output-section { padding: 40px 0 20px; }
+.output-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.output-title { font-family: 'Fraunces', serif; font-size: 1.6rem; color: var(--text-bright); font-weight: 700; margin-bottom: 24px; }
+.collapse-section { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; background: var(--bg-card); overflow: hidden; }
+.collapse-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; user-select: none; transition: background 0.15s; }
+.collapse-header:hover { background: var(--bg-card-hover); }
+.collapse-header h3 { font-size: 0.95rem; font-weight: 600; color: var(--text-bright); display: flex; align-items: center; gap: 10px; }
+.collapse-header .badge { font-size: 0.65rem; padding: 2px 8px; border-radius: 100px; font-weight: 600; letter-spacing: 0.03em; }
+.badge-high { background: rgba(52,211,153,0.15); color: var(--win); }
+.badge-moderate { background: rgba(96,165,250,0.15); color: var(--hit); }
+.badge-p1 { background: rgba(248,113,113,0.15); color: var(--p1); }
+.badge-p2 { background: rgba(251,191,36,0.15); color: var(--p2); }
+.badge-critical { background: rgba(248,113,113,0.2); color: var(--danger); }
+.badge-new { background: rgba(167,139,250,0.15); color: var(--purple); }
+.collapse-arrow { font-size: 1.2rem; color: var(--text-dim); transition: transform 0.25s; flex-shrink: 0; }
+.collapse-section.open .collapse-arrow { transform: rotate(180deg); }
+.collapse-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.collapse-section.open .collapse-body { max-height: 80000px; }
+.collapse-content { padding: 0 20px 20px; border-top: 1px solid var(--border); }
+.prose { line-height: 1.72; }
+.prose p { margin-bottom: 14px; font-size: 0.85rem; }
+.prose strong { color: var(--text-bright); font-weight: 600; }
+.prose h4 { font-size: 0.92rem; font-weight: 700; color: var(--accent); margin: 20px 0 8px; }
+.prose em { color: var(--text-dim); }
+.prose ul { margin: 8px 0 14px 20px; }
+.prose li { margin-bottom: 4px; font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { text-align: left; padding: 8px 12px; background: rgba(52,211,153,0.06); color: var(--accent); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); white-space: nowrap; }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+.sketch { background: rgba(52,211,153,0.04); border-left: 3px solid var(--accent-dim); padding: 12px 16px; margin: 10px 0; border-radius: 0 6px 6px 0; }
+.sketch-title { font-size: 0.82rem; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+.sketch-body { font-size: 0.82rem; color: var(--text); line-height: 1.6; }
+.callout { padding: 14px 18px; border-radius: 6px; margin: 14px 0; font-size: 0.85rem; color: #ffffff; }
+.callout-warn { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); }
+.callout-danger { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.2); }
+.callout-info { background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.15); }
+.gap-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+.gap-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.gap-id { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
+.gap-priority { font-size: 0.62rem; font-weight: 700; padding: 1px 7px; border-radius: 3px; letter-spacing: 0.04em; }
+.priority-p1 { background: rgba(248,113,113,0.15); color: var(--p1); }
+.priority-p2 { background: rgba(251,191,36,0.15); color: var(--p2); }
+.priority-p3 { background: rgba(156,163,175,0.1); color: var(--fail); }
+.gap-desc { font-weight: 600; color: var(--text-bright); font-size: 0.88rem; margin-bottom: 6px; }
+.gap-evidence { font-size: 0.78rem; color: var(--text-dim); line-height: 1.55; margin-bottom: 8px; }
+.gap-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.gap-tag { font-size: 0.62rem; padding: 2px 8px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 3px; color: var(--text-dim); }
+.tab-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.tab-btn { background: none; border: none; color: var(--text-dim); padding: 10px 16px; font-size: 0.8rem; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.one-para { font-size: 0.92rem; line-height: 1.8; color: var(--text); padding: 20px 24px; background: linear-gradient(135deg, rgba(52,211,153,0.03), rgba(167,139,250,0.03)); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; }
+.confidence { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-top: 10px; }
+.conf-high { background: rgba(52,211,153,0.1); color: var(--win); }
+.conf-mod { background: rgba(96,165,250,0.1); color: var(--hit); }
+.conf-low { background: rgba(251,191,36,0.1); color: var(--warn); }
+.comp-context { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; margin: 12px 0 8px; font-size: 0.82rem; line-height: 1.6; }
+.comp-context strong { color: var(--accent) !important; }
+.comp-context em { color: var(--text-dim) !important; }
+@media (max-width: 768px) { .hero h1 { font-size: 1.6rem; } .collapse-content { padding: 0 14px 14px; } }
+.page-section { display: none; }
+.page-section.active { display: block; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+.json-block { background: var(--bg-section); border: 1px solid var(--border); border-radius: 6px; padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; line-height: 1.5; overflow-x: auto; max-height: 500px; overflow-y: auto; color: var(--text-dim); white-space: pre; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+.kpi-card { background: var(--bg-section); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+.kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+.kpi-label { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.status-red { color: var(--danger) !important; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+<div class="container hero-content">
+<div class="subtitle">Strategic Gauntlet</div>
+<h1>Greenlight</h1>
+<div class="meta">
+<span>📅 April 10, 2026</span>
+<span>💰 $1.42M L30 · $33.6M Lifetime</span>
+<span>📊 100 L30 Ads · 100 Lifetime Top Ads</span>
+<span>🔴 WS crashed to 14% — Creative Crisis</span>
+</div>
+</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+<div class="container">
+<div class="nav-inner">
+<button class="nav-btn active" onclick="showPage('overview')">Intelligence Overview</button>
+<button class="nav-btn" onclick="showPage('portfolio')">Synthesized Portfolio</button>
+<button class="nav-btn" onclick="showPage('gaps')">Gaps Table</button>
+<button class="nav-btn" onclick="showPage('competitors')">Competitors</button>
+<button class="nav-btn" onclick="showPage('research')">Consumer Research</button>
+<button class="nav-btn" onclick="showPage('client')">Client Context</button>
+</div>
+</div>
+</div>
+
+<div class="container">
+
+
+<div class="page-section active" id="page-overview">
+<div class="output-section">
+<div class="output-label">Output 1</div>
+<div class="output-title">Intelligence Overview</div>
+
+
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-value">$1.42M</div><div class="kpi-label">L30 Spend</div></div>
+<div class="kpi-card"><div class="kpi-value status-red">14%</div><div class="kpi-label">TS Wallet Share</div></div>
+<div class="kpi-card"><div class="kpi-value">$292K</div><div class="kpi-label">TS L30 Spend</div></div>
+<div class="kpi-card"><div class="kpi-value">$8,340</div><div class="kpi-label">TS Avg $/Ad</div></div>
+<div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">TS Ads</div></div>
+<div class="kpi-card"><div class="kpi-value">1</div><div class="kpi-label">TS Top-7 Ads</div></div>
+</div>
+
+<div class="collapse-section open">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>The Account in One Paragraph </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="one-para">
+Greenlight is a $1.42M/month L30 account where TubeScience is losing. TS contributes 35 ads but only $292K (21% of spend) at an average $8,340 per ad — less than half the per-ad spend of both Narrative ($16,771) and Client ($17,640). The portfolio's proven creative DNA — child-POV voice ($530K), scenario-based micro-PAS ($339K), and UGC testimonial video ($520K) — is entirely owned by the client and Narrative. TS has zero representation in the top three mechanisms at scale. The one lane TS owns is Messaging-Hero Statics ($159K, 77.6% creator share), anchored by the NEWS FLASH concept ($198K combined across two ad sets in the launch window). <strong>Wallet share has crashed from 30% to 14%</strong> since late February, spend collapsed from $118K to $54K, and performance flipped from beating internal to trailing by 14%. This is a creative crisis on an account where TS's survival depends on proving differentiated value within the next 1-2 sprint cycles. The path forward is not competing head-to-head with the client's UGC operation — it's owning the format lanes the client can't or won't produce: <strong>carousels, data-driven statics, comedy/skit video, and the dad persona</strong>.
+</div>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>What's Working and Why <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<h4>1. Child-POV / Kid-as-Protagonist Mechanism — $530K L30, $722K launch</h4>
+<p>The single most validated mechanism on the account. When the child is the protagonist — speaking, demonstrating, expressing pride — ads scale. This works because it creates an instant pattern interrupt for parents scrolling feed, activates aspirational parenting emotions, and serves as its own social proof. Durability is high: the mechanism carries $530K in the L30 and appears in 22 lifetime ads under the broader "Financial Literacy Transformation Narrative" ($11.4M). <strong>TS is entirely absent from this mechanism.</strong></p>
+
+<h4>2. Behavioral Proof / Expectation Violation — $290K L30, $198K NEWS FLASH</h4>
+<p>"NEWS FLASH: Warning — 8-year-olds are asking for more chores." This mechanism works because it violates a universal parental assumption (kids hate chores), generating curiosity while delivering the product's strongest proof point. The NEWS FLASH static is <strong>TS's only proven mechanism at scale</strong> — $75K in L30, $198K across two conclusive ad sets, ROAS of 2.26-2.40. Format-moated: can't be replicated by handing a script to an influencer.</p>
+
+<h4>3. UGC Testimonial from Real Parents — $520K L30, $12.6M lifetime</h4>
+<p>The account's workhorse format. Narrated B-roll testimonials outperform direct-to-camera by roughly 5:1 in lifetime spend. Entirely owned by Client and Narrative — TS has only $28K in this format.</p>
+
+<h4>4. Statics as a Performance Lane — $459K L30, $13.9M lifetime</h4>
+<p>This account performs unusually well on statics. Card-Design Choice Prompt ($6.3M lifetime, including the #1 all-time ad at $1.65M), NEWS FLASH ($198K launch), and GRL82 notepad static ($307K launch winner). TS's bet on statics is directionally correct, but needs to expand into carousels and data-driven formats.</p>
+
+<h4>5. "Mom Hack" / Parenting Shortcut Promise — $107K launch</h4>
+<p>TS-produced content that won a clean 4-way hook test at 94.4% concentration. The only TS-produced video mechanism that scaled during the launch window. Produced TS Hybrid format — a lane TS can own.</p>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>What's Broken: The Key Strategic Problems <span class="badge badge-critical">Critical</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="callout callout-danger">
+<strong>🚨 Single-sentence turnaround thesis:</strong> TS is losing because it's competing in the client's strength lane (UGC testimonials) instead of owning the lanes the client can't produce (carousels, data-driven statics, comedy/skit video, dad persona creative).
+</div>
+
+<h4>1. TS has no video format at scale — video carries 67% of spend (CG-1)</h4>
+<p>TubeScience has $84K total across all video formats vs. $857K from Client and Narrative. In UGC Testimonial Video — the #1 format — TS has $28K vs. $492K from others. The J-53 "Mom Hack" infomercial ($107K, 94.4% winner) proves TS CAN make video that works — but it's a single example against a portfolio that needs consistent video output.</p>
+
+<h4>2. CBO v2 testing structure starving new creative of spend (MG-1)</h4>
+<p>Nine concepts launched, $232 total spend — $25 per concept. At ~$150 per registration, zero conversions are possible. <strong>This is the #1 revenue blocker.</strong> 58 of 93 ad sets land in smoke tier ($4,200 average spend). No creative strategy can overcome a media structure that prevents ads from getting enough delivery to generate signal.</p>
+
+<h4>3. TS creative is not differentiated from client output (WG-1)</h4>
+<p>The client produces UGC testimonials, product demos, and infomercials at higher quality and scale. Narrative produces UGC testimonials and script-length statics. The only format lanes the client and Narrative do NOT produce are <strong>carousels</strong> and <strong>data-driven statics</strong>. Carousels are consistently called out as TS's sole differentiated format.</p>
+
+<h4>4. Glc-33 concentration risk — 23.9% single-concept dependency (CG-9)</h4>
+<p>Two Glc-33 child-POV variants carry $339K. Combined with 74.7% spend in a single voice type (UGC Demo) and 66.3% in a single visual style (Elevated Native), the portfolio lacks diversity to absorb fatigue.</p>
+
+<h4>5. Bottom funnel essentially nonexistent — retargeting structurally blocked (CG-2, MG-2)</h4>
+<p>Only 4 ads and $28,582 (2.0%) at BoF. The 180-day visitor exclusion prevents any Meta retargeting. Zero Deal-motivated creative. The "why pay when Chase is free?" objection is completely unaddressed.</p>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>TS Value Assessment </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="callout callout-warn">
+<strong>Honest assessment:</strong> If TS left tomorrow, the client would lose ~21% of portfolio spend ($292K) — but the $75K NEWS FLASH static and most TS output could be replicated. Carousels and the dad persona are the only genuinely defensible moats.
+</div>
+<p><strong>What TS produces that the client can't/won't:</strong> (1) Carousels — explicitly confirmed as TS's only differentiated format. (2) Data-driven concept angles — the NEWS FLASH mechanism is strategy-led, not talent-led. (3) Testing velocity on static formats.</p>
+<p><strong>TS must prove in the next sprint cycle:</strong></p>
+<p>① Carousels can scale as a differentiated format lane — more variants of J66/J79 chore outcomes carousels.</p>
+<p>② TS can produce video content that competes — the J-53 "Mom Hack" mechanism needs replication.</p>
+<p>③ The dad persona unlock (J75) is real and scalable — this is the single biggest strategic win and TS owns it.</p>
+<p><em>These three things — carousel moat, video viability, and dad persona ownership — are the QBR story.</em></p>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Constraints Quick-Reference </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="table-wrap"><table>
+<tr><th>Constraint</th><th>Source</th><th>Workaround</th></tr>
+<tr><td>Gift language prohibited (CARD Act)</td><td>B&L</td><td>Frame as "set them up with" or "get them started"</td></tr>
+<tr><td>Fear-mongering / clickbait banned</td><td>B&L</td><td>Empathetic problem framing. Monarch-style "you're not bad at this"</td></tr>
+<tr><td>Shame-based hooks / accusatory messaging banned</td><td>B&L + Client</td><td>Shared struggle, not judgment</td></tr>
+<tr><td>"Empowerment" angle flagged</td><td>Client pushback</td><td>Use kid-agency language instead</td></tr>
+<tr><td>Stick figures / lo-fi illustration rejected by Annie</td><td>Annie (brand/legal)</td><td>Avoid until Alex clarifies</td></tr>
+<tr><td>Deal/promo-heavy sprints rejected</td><td>Client explicit</td><td>Cap BoF/deal at 15-20% of output</td></tr>
+<tr><td>CBO v2 throttles test spend</td><td>Media structure</td><td>Negotiate own testing cell</td></tr>
+<tr><td>180-day visitor exclusion</td><td>Client media policy</td><td>Push for 30-60 day reduction at QBR</td></tr>
+<tr><td>FamilyShield LP not live</td><td>Client dev</td><td>Cannot test at scale until LP ships</td></tr>
+</table></div>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Open Questions Requiring Resolution </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="table-wrap"><table>
+<tr><th>Question</th><th>Evidence A</th><th>Evidence B</th><th>Resolution</th><th>Owner</th></tr>
+<tr><td><strong>Is NRTV actually gone?</strong></td><td>Podsey P1s: "getting kicked out"</td><td>3 new NRTV ads launched Apr 7-8</td><td>Confirm with Alex before QBR</td><td>Darlene</td></tr>
+<tr><td><strong>CPA target: $130 or $302?</strong></td><td>Early Slack: $130 CAC</td><td>Jan 26: $302 Meta iCAC</td><td>Reconfirm with JJ at QBR</td><td>Brandon/Jeff</td></tr>
+<tr><td><strong>Can TS get own testing cell?</strong></td><td>CBO throttles all tests</td><td>Darlene negotiating</td><td>Cost-of-waste argument</td><td>Darlene</td></tr>
+<tr><td><strong>Is dad persona real?</strong></td><td>J75: $97K at weak ROAS</td><td>Jeff: "QBR headline"</td><td>3-4 broader dad hooks next sprint</td><td>Yvonne</td></tr>
+<tr><td><strong>FamilyShield LP ETA?</strong></td><td>Jeff: "scale second motivator"</td><td>Brandon: LP in development</td><td>Get delivery date</td><td>Jeff → client</td></tr>
+</table></div>
+
+</div></div></div>
+</div></div>
+
+<div class="page-section" id="page-portfolio">
+<div class="output-section">
+<div class="output-label">Output 2</div>
+<div class="output-title">Synthesized Portfolio Report</div>
+<p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:20px;">Full 13-section portfolio breakdown with cross-source evidence from Lifetime Top Ads, Client Context, Consumer Research, Competitor Report, and Launch Readout woven into each section.</p>
+
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>1) Portfolio Overview <span class="badge badge-moderate">Moderate</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="table-wrap"><table>
+<tr><th>Tier</th><th>Count</th><th>Spend</th><th>% Total</th></tr>
+<tr><td>Exceptional ($250K+)</td><td>0</td><td>$0</td><td>0%</td></tr>
+<tr><td>Very Strong ($50K–$250K)</td><td>7</td><td>$812,548</td><td>57.2%</td></tr>
+<tr><td>Solid ($10K–$50K)</td><td>17</td><td>$304,127</td><td>21.4%</td></tr>
+<tr><td>Low (&lt;$10K)</td><td>76</td><td>$302,715</td><td>21.3%</td></tr>
+</table></div>
+<p>Zero Exceptional-tier ads — a meaningful regression from lifetime patterns where 45 of top 100 cleared $250K. The two Glc-33 variants ($170K + $168K) are the closest but represent a single-concept dependency at 23.9% of all spend.</p>
+<p>76 low-spend ads ($303K combined) reflect the CBO v2 testing problem: 58 of 93 launch-window ad sets landed in smoke tier with $4,200 average spend. A media gap masquerading as a creative output issue.</p>
+<h4>Creator Breakdown</h4>
+<div class="table-wrap"><table>
+<tr><th>Creator</th><th>Ads</th><th>Spend</th><th>Avg $/Ad</th><th>WINs</th><th>$50K+ Ads</th></tr>
+<tr><td>Client</td><td>43</td><td>$758,532</td><td>$17,640</td><td>4</td><td>4</td></tr>
+<tr><td>Narrative</td><td>22</td><td>$368,968</td><td>$16,771</td><td>3</td><td>2</td></tr>
+<tr><td>TubeScience</td><td>35</td><td>$291,890</td><td>$8,340</td><td>3</td><td>1</td></tr>
+</table></div>
+<p>TS produces the most ads but at less than half the per-ad spend of both competitors. Lifetime confirms this is structural: TS holds only 2 of 100 all-time top ads at $356K (1.1% of total).</p>
+<div class="confidence conf-mod">MODERATE CONFIDENCE — Portfolio structure confirmed by lifetime data</div>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>2) Audience & Placement <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Gender:</strong> 78.8% female ($1.29M), 20.5% male ($336K) — consistent with lifetime (78.4% F). Rock-solid gender split across both windows.</p>
+<p><strong>Age:</strong> 35-44 leads at 42.2%, 25-34 at 33.3%. Core buying audience is 25-44 (75.5%) — parents of school-age children.</p>
+<p><strong>Placements:</strong> Feed 43.2%, Reels (all) 37.6%, Stories 15.7%. Reels is nearly 40% of spend but TS's primary format (statics) is not Reels-native. TS needs vertical-first video content to capture Reels spend.</p>
+<p><strong>TS demographic footprint:</strong> In the highest-value cell (F 35-44), TS has $42K vs. Client's $387K. Limited brand page distribution ($38K on Greenlight page) constrains TS to ~15% of the total audience pool.</p>
+<div class="confidence conf-high">HIGH CONFIDENCE — No contradictions across sources</div>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>3) Page & Distribution <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Brand page (Greenlight):</strong> 71.1% of spend ($1.17M). TS has only $38K on brand page vs. $729K Client and $399K Narrative.</p>
+<p><strong>Whitelist pages:</strong> Smart Money Mama (14.3%, $235K) and Pennies & Playdates (13.9%, $228K). TS primarily runs on Smart Money Mama ($82K — 64% of TS total).</p>
+<p>Lifetime data adds critical context: whitelist pages show higher ROAS (Smart Money Mama at 1.60) but brand page has 20x the volume. Narrative's brand page efficiency is striking: $3.7M generating 15,402 purchases vs. Client's $34.2M generating 10,143.</p>
+<p><strong>Key implication:</strong> TS needs brand page distribution expansion to compete on even terms.</p>
+<div class="confidence conf-high">HIGH CONFIDENCE</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>4) Mechanisms <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="table-wrap"><table>
+<tr><th>#</th><th>Mechanism</th><th>L30 Spend</th><th>Lifetime Parallel</th><th>TS Spend</th></tr>
+<tr><td>1</td><td>Child-POV Voice / Pattern Interrupt</td><td>$530,044</td><td>$11.4M</td><td style="color:var(--danger)">$0</td></tr>
+<tr><td>2</td><td>Scenario Micro-PAS Sequencing</td><td>$338,625</td><td>(within Glc-33)</td><td style="color:var(--danger)">$0</td></tr>
+<tr><td>3</td><td>Dual-Benefit Bridge Close</td><td>$338,625</td><td>(within Glc-33)</td><td style="color:var(--danger)">$0</td></tr>
+<tr><td>4</td><td>Behavioral Proof (Outcome-via-Behavior)</td><td>$290,086</td><td>$4.8M</td><td>$74,955</td></tr>
+<tr><td>5</td><td>Spousal Skepticism Hook</td><td>$100,778</td><td>$930K</td><td style="color:var(--danger)">$0</td></tr>
+</table></div>
+<p><strong>Critical finding:</strong> TS has zero spend in the top 3 mechanisms. Consumer research validates all five. Competitor data shows nobody else uses these mechanisms — they're competitively uncontested.</p>
+<div class="confidence conf-high">HIGH CONFIDENCE — Confirmed across L30, lifetime, launch, consumer research</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>5) Visual Execution <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>UGC Testimonial Video</strong> dominates at 36.6% ($520K). TS has 5.4% share ($28K).</p>
+<p><strong>TS owns Messaging-Hero Statics</strong> at 77.6% creator share ($159K of $205K).</p>
+<p><strong>Lifetime shift:</strong> Product-Hero Statics ($8.4M lifetime, 25%) barely present in L30. Card-Design Choice Statics ($6.3M lifetime including #1 all-time ad) have disappeared entirely.</p>
+<p><strong>Visual style:</strong> Elevated Native dominates (66.3%). TS over-indexes on Elevated Brand (72.8% of EB spend). The NEWS FLASH's success in Elevated Brand confirms this can work for specific formats.</p>
+<div class="confidence conf-high">HIGH CONFIDENCE</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>6) Messaging & Motivation <span class="badge badge-moderate">Moderate</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Major shift:</strong> Problem motivation jumped from 8.3% (lifetime) to 44.0% (L30). This reflects a deliberate strategic pivot confirmed by client context — Melissa and Jeff directed the shift from features to behavioral outcomes in Dec 2025.</p>
+<p><strong>Deal entirely absent:</strong> Client explicitly rejected deal-heavy sprints. But consumer research identifies "why pay when Chase is free?" as the most dangerous blind spot. Competitor report shows zero kids' banking BoF creative — open lane.</p>
+<p><strong>97 of 100 ads</strong> are product-positioned (OT-PRODUCT). For a subscription product competing against free alternatives, this is a strategic bet that behavioral transformation value will override price objections without direct addressing.</p>
+<div class="confidence conf-mod">MODERATE — Problem shift confirmed but Deal absence is an untested deliberate choice</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>7) Voice & Persona <span class="badge badge-moderate">Moderate</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>UGC Demo dominates</strong> at 74.7% of spend. TS is primary No Voice creator ($120K) and Brand Voice ($34K), but only 10.7% of UGC Demo.</p>
+<p><strong>Male persona gap:</strong> 20.5% male delivery ($336K) but VP-M3544+DAD has 1 ad at $16K. J75 dad creative at $97K launch spend — Jeff calls it "the QBR headline." Needs broader hooks.</p>
+<p><strong>45-54 gap:</strong> 13.8% of audience ($226K) with zero persona-specific creative.</p>
+<p><strong>Expert/Authority voices entirely untested.</strong> One lifetime research-authority hook scaled to $592K.</p>
+<div class="confidence conf-mod">MODERATE — Dad signal directional, not conclusive</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>8) Funnel & Reach <span class="badge badge-moderate">Moderate</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>L30:</strong> ToF 42.2%, MoF 55.7%, BoF 2.0%. Healthier balance than lifetime (19.3% / 77.9% / 2.4%).</p>
+<p><strong>TS skews ToF (74%)</strong> consistent with static strengths. Client skews MoF (73%) consistent with video.</p>
+<p><strong>BoF critically underweight</strong> at 2.0%, compounded by 180-day visitor exclusion. Zero kids' banking competitors run BoF creative either — open competitive lane.</p>
+<div class="confidence conf-mod">MODERATE — BoF underweight structural (180-day exclusion)</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>9) TAM Profile <span class="badge badge-moderate">Moderate</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p>All $50K+ ads are <strong>Medium TAM</strong>. Portfolio uniformly self-selects for parents of school-age children (6-16) experiencing chore/allowance friction. Appropriate for conversion focus but creates a natural reach ceiling.</p>
+<p><strong>NEWS FLASH static</strong> achieves Medium-Wide TAM by removing demographic filtering entirely — proven expansion pattern.</p>
+<p>Consumer research identifies broader-TAM entry points: "cash is dead but allowance isn't" (universal), "29 states require financial literacy" (urgency), "kid just got their first phone" (trigger event).</p>
+<div class="confidence conf-mod">MODERATE</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>10) Language Patterns <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<h4>Proven Hook Structures (by combined spend)</h4>
+<p><strong>1. Declarative product intro:</strong> "This is Greenlight, a debit card and app designed just for families." — $425K combined. MoF, relevance-first.</p>
+<p><strong>2. Kid-voice ownership:</strong> "I ❤️ my Greenlight" / "I pay for stuff on my own" — $486K combined.</p>
+<p><strong>3. Spousal skepticism:</strong> "My husband said, 'You got our daughter a debit card?'" — $218K + $930K lifetime.</p>
+<p><strong>4. Expectation violation:</strong> "NEWS FLASH: Warning — 8-year-olds are asking for more chores" — $198K combined. TS's only proven hook.</p>
+<p><strong>5. Identity + boundary:</strong> "It's my job to raise my children. It's NOT my job to remind them 20 times…" — $112K.</p>
+<p><strong>6. Parenting hack:</strong> "MOM HACK: How to get your kids to do more chores in 2026." — $107K. TS's only proven video hook.</p>
+<h4>Untested Hooks with Strong Evidence</h4>
+<p>"Your kid's school is about to require financial literacy — and you're not ready" (29-state mandate), "Chase's free kids' banking card runs on Greenlight's technology" (credibility reframe), "Money habits form by age 12" (urgency).</p>
+<div class="confidence conf-high">HIGH CONFIDENCE — Triangulated across L30, launch, consumer research</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>11) Visual Patterns <span class="badge badge-high">High</span></h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Dominant shot:</strong> Child-activity B-roll with parent voice-over (5 of 7 $50K+ video ads).</p>
+<p><strong>Product demo POV:</strong> Glc-33 child-perspective footage (child's hands swiping card). Launch readout confirms child-POV crushed parent-POV at 99.7% concentration.</p>
+<p><strong>Notepad/handwriting format:</strong> Narrative's $131K Gavinmamasboy static. Kid's handwriting style creates instant authenticity.</p>
+<p><strong>Card-swipe moment, app screen inserts, before/after behavioral arcs</strong> remain the visual proof toolkit.</p>
+<div class="confidence conf-high">HIGH CONFIDENCE</div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>12) Gaps & Opportunities → See Output 3 </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p>Section 12 is replaced by the Refined Gaps Table (Output 3), which cross-validates portfolio gaps against all external sources with concept sketches and replicability assessments. <button class="tab-btn" onclick="showPage('gaps')" style="color:var(--accent)">→ View Gaps Table</button></p>
+
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>13) JSON Profile </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p>The L30 portfolio breakdown JSON is preserved as the canonical machine-readable summary. The gauntlet's cross-validated gap identification, concept sketches, and replicability assessments are in the Gaps Table JSON.</p>
+
+</div></div></div>
+</div></div>
+
+<div class="page-section" id="page-gaps">
+<div class="output-section">
+<div class="output-label">Output 3</div>
+<div class="output-title">Refined Gaps Table</div>
+
+<div class="tab-bar">
+<button class="tab-btn active" onclick="showTab('creative-gaps', this)">Creative Gaps (13)</button>
+<button class="tab-btn" onclick="showTab('media-gaps', this)">Media Gaps (5)</button>
+<button class="tab-btn" onclick="showTab('workflow-gaps', this)">Workflow Gaps (8)</button>
+</div>
+
+<div class="tab-content active" id="tab-creative-gaps">
+
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-1</span><span class="gap-priority priority-p1">P1</span><span class="gap-tag">ADAPT</span><span class="gap-tag">Visual Format</span><span class="gap-tag">medium replicability</span></div>
+<div class="gap-desc">TS video format gap — $84K video vs. $857K others on 67% video-spend account</div>
+<div class="gap-evidence">L30: TS UGC Testimonial $28K vs. $492K others. Launch: J-53 Mom Hack proves TS CAN win video. Client context: 'No working UGCs.' Consumer research: UGC recommended #1 format.</div>
+<div class="sketch"><div class="sketch-title">Sketch 1 — 'The Cash Round-Trip' Comedy Skit</div><div class="sketch-body">Mom hands kid $20. Kid hands it back: 'Can you buy this on Amazon for me?' Mom looks at camera, deadpan. Cut to Greenlight: kid scans card, mom gets notification. Hook: 'Every parent has been their kid's personal ATM. Here's how I stopped.'</div></div><div class="sketch"><div class="sketch-title">Sketch 2 — 'Empathetic Problem Reframe' Talking Head (Monarch Adapt)</div><div class="sketch-body">Mom DTC, warm: 'You're not bad at teaching your kids about money. Nobody taught US about money. But now there's a tool that does it for you.' Cut to kid with $47 saved toward a skateboard. Adapts Monarch's $999K mechanism.</div></div><div class="sketch"><div class="sketch-title">Sketch 3 — 'Dad Discovers Chore Mode' POV Video</div><div class="sketch-body">Dad sets up Greenlight chores, films genuine reaction when kid texts asking for extra chores 48 hours later. Hook: 'I set up chores on Greenlight to see what would happen. 48 hours later, my kid texted me this.'</div></div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-2</span><span class="gap-priority priority-p1">P1</span><span class="gap-tag">NEW</span><span class="gap-tag">Funnel</span><span class="gap-tag">low replicability</span></div>
+<div class="gap-desc">Bottom funnel + price justification creative — 2.0% BoF, zero Deal, zero pricing barrier handling</div>
+<div class="gap-evidence">L30: 2.0% BoF. Lifetime: 2.4%. Consumer research: 'why pay when free?' is #1 objection. Competitor: zero BoF from Chase or Acorns. Client rejected deal-heavy but acknowledges need.</div>
+<div class="sketch"><div class="sketch-title">Sketch 1 — 'Same Technology, 10x Features' Comparison Carousel</div><div class="sketch-body">Card 1: 'Chase's kids' banking runs on Greenlight's technology.' Cards 2-3: free vs. $1.20/kid/month feature comparison. Card 4: social proof + CTA. Format moat: carousel is TS's differentiated format.</div></div><div class="sketch"><div class="sketch-title">Sketch 2 — 'The $1.20 Math' NEWS FLASH Static</div><div class="sketch-body">Elevated Brand: 'PRICE CHECK: The most complete kids' money app costs less than a juice box per kid.' $5.99÷5 = $1.20 + feature list. Adapts $198K validated mechanism to price-justification angle.</div></div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-3</span><span class="gap-priority priority-p1">P1</span><span class="gap-tag">ADAPT</span><span class="gap-tag">Mechanism</span><span class="gap-tag">low replicability</span></div>
+<div class="gap-desc">TS has not deployed the #1 mechanism (child-POV) — $530K L30, $722K launch, $0 TS</div>
+<div class="gap-evidence">L30: $530K child-POV, $0 TS. Launch: 'Kid-as-Protagonist' highest-confidence mechanism. Lifetime: $11.4M. Consumer: 'my kid asked to do chores' strongest proof.</div>
+<div class="sketch"><div class="sketch-title">Sketch 1 — 'Things I Bought With My Own Money' Kid-Narrated Carousel</div><div class="sketch-body">Kid narrates: 'I saved up $47 from chores.' Card 2: 'Then I invested $10 in the S&P 500. I'm eight.' Funny + impressive. Format moat: carousel + kid narration + investment proof.</div></div><div class="sketch"><div class="sketch-title">Sketch 2 — 'My Chore Negotiations' Produced Skit</div><div class="sketch-body">Kid negotiates rates at kitchen table: 'Dishes are $2 but trash is $3 — it's heavier.' App shows chore creation. Hook: 'My 9-year-old negotiated a raise for taking out the trash.'</div></div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-4</span><span class="gap-priority priority-p1">P1</span><span class="gap-tag">MORE + NEW</span><span class="gap-tag">Visual Format</span><span class="gap-tag">low replicability</span></div>
+<div class="gap-desc">Carousel format — TS's only differentiated format — carries only $15K, needs expansion</div>
+<div class="gap-evidence">Client context: 'Carousels are the one format NRTV and GL internal are NOT making.' J66/J79 chore outcomes carousels on-target. Competitor: carousel absent from competitive set.</div>
+<div class="sketch"><div class="sketch-title">Sketch 1 — Chore Outcomes Expansion</div><div class="sketch-body">Iteration on J66/J79: 'Week 1: Reluctant dish duty. Week 4: Requesting extra chores. Week 8: Negotiating pay rates.' Before/after told across cards.</div></div><div class="sketch"><div class="sketch-title">Sketch 2 — '5 Things My Kid Learned' Carousel</div><div class="sketch-body">Numbered cards with product proof: earn, save, comparison shop, invest, negotiate. Parent quote on final card. Educational format adapted to carousel.</div></div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-5</span><span class="gap-priority priority-p2">P2</span><span class="gap-tag">NEW</span><span class="gap-tag">Motivator</span><span class="gap-tag">medium replicability</span></div>
+<div class="gap-desc">Deal/value-justification creative entirely absent despite free competitors</div>
+<div class="gap-evidence">L30: 0% Deal. Lifetime: 0.9%. Consumer: price dealbreaker for budget-conscious families. Competitor: zero subscription value-selling model. Client: rejected deal-heavy but gap is real.</div>
+<div class="sketch"><div class="sketch-title">Sketch 1 — 'Financial Illiteracy Tax' NEWS FLASH</div><div class="sketch-body">'NEWS FLASH: The average American loses $1,819/year to financial illiteracy (TIAA). Greenlight costs $72/year.' Value reframe, not deal.</div></div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-6</span><span class="gap-priority priority-p1">P1</span><span class="gap-tag">UPGRADE</span><span class="gap-tag">Persona</span><span class="gap-tag">medium replicability</span></div>
+<div class="gap-desc">Dad persona — 'single biggest strategic win' — needs broader hooks to scale</div>
+<div class="gap-evidence">L30: VP-M3544+DAD 1 ad $16K. Launch: J75 $97K at weak ROAS. Client context: Jeff calls this 'QBR headline.' Competitor: zero father-specific creative.</div>
+<div class="sketch"><div class="sketch-title">Sketch 1 — 'Dads, Stop Giving Your Kid Cash'</div><div class="sketch-body">Dad DTC, casual: 'Dads. I know we all do this. Kid asks for money, we hand them whatever we have.' Cut to Greenlight demo. Broader than 'Single dads' — removes narrow identity gating.</div></div><div class="sketch"><div class="sketch-title">Sketch 2 — 'Dad's Weekend' POV Video</div><div class="sketch-body">Saturday morning POV: kid shows completed chore chart, dad approves payment. 'She used to ask me to buy stuff. Now she tells me what she's saving for.'</div></div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-7</span><span class="gap-priority priority-p2">P2</span><span class="gap-tag">ADAPT</span><span class="gap-tag">Messaging</span><span class="gap-tag">low replicability</span></div>
+<div class="gap-desc">Newsjacking: 29-state financial literacy mandate + Financial Literacy Month untapped</div>
+<div class="gap-evidence">Consumer research: surprise factor. Competitor: Intuit's newsjacking = $6.9M (highest mechanism in dataset). Client: April = Financial Literacy Month + Mathnasium partnership.</div>
+
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-8</span><span class="gap-priority priority-p2">P2</span><span class="gap-tag">NEW</span><span class="gap-tag">Visual Format</span><span class="gap-tag">low replicability</span></div>
+<div class="gap-desc">Comedy/skit format absent from portfolio and competitive set</div>
+<div class="gap-evidence">Competitor: Rocket Money validates comedy + fintech at $1.5M. Consumer: 3+ comedy-ready scenarios. B&L: comedy not blocked if no shaming.</div>
+
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-9</span><span class="gap-priority priority-p2">P2</span><span class="gap-tag">MORE</span><span class="gap-tag">Diversity</span><span class="gap-tag">N/A</span></div>
+<div class="gap-desc">Glc-33 concentration risk — 23.9% of spend in one concept</div>
+<div class="gap-evidence">L30: $339K in two variants of same creative. 74.7% V-UGC-DEMO. 66.3% Elevated Native. Fatigue on any pillar threatens the portfolio.</div>
+
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-10</span><span class="gap-priority priority-p3">P3</span><span class="gap-tag">NEW</span><span class="gap-tag">Audience</span><span class="gap-tag">medium replicability</span></div>
+<div class="gap-desc">Grandparent/gifting audience absent from portfolio and competitive set</div>
+<div class="gap-evidence">Consumer: real Trustpilot evidence. Competitor: zero grandparent targeting. B&L: gift LANGUAGE banned but grandparent USE CASE is not.</div>
+
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-11</span><span class="gap-priority priority-p3">P3</span><span class="gap-tag">NEW</span><span class="gap-tag">Voice</span><span class="gap-tag">medium replicability</span></div>
+<div class="gap-desc">Expert/authority voice untested despite $592K lifetime proof point</div>
+<div class="gap-evidence">Lifetime: Family of Nomads $592K research-authority hook. Competitor: V-EXPERT absent from competitive set.</div>
+
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-12</span><span class="gap-priority priority-p3">P3</span><span class="gap-tag">ADAPT</span><span class="gap-tag">Persona</span><span class="gap-tag">medium replicability</span></div>
+<div class="gap-desc">45-54 parent persona has 13.8% audience share but zero creative</div>
+<div class="gap-evidence">L30 + lifetime both show 45-54 as meaningful. Consumer: 'teen independence' and 'investing' relevant for older-child segment.</div>
+
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">CG-13</span><span class="gap-priority priority-p3">P3</span><span class="gap-tag">ADAPT</span><span class="gap-tag">Visual Format</span><span class="gap-tag">medium-high replicability</span></div>
+<div class="gap-desc">Card-choice static — $6.3M lifetime mechanism — disappeared from L30</div>
+<div class="gap-evidence">Lifetime: 12 ads, $6.3M including #1 all-time ad at $1.65M. L30: zero. Could be fatigue or deprioritization.</div>
+
+</div>
+</div>
+<div class="tab-content" id="tab-media-gaps">
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">MG-1</span><span class="gap-priority priority-p1">Critical</span><span class="gap-tag">Client (JJ/Alex) + Darlene</span></div>
+<div class="gap-desc">CBO v2 testing starving new creative — $25/concept avg spend</div>
+<div class="gap-evidence">Client context: Brandon messaged JJ/Alex. 58/93 ad sets in smoke tier. — #1 revenue blocker. Negotiate own testing cell.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">MG-2</span><span class="gap-priority priority-p1">High</span><span class="gap-tag">Client (JJ) + Brandon</span></div>
+<div class="gap-desc">180-day visitor exclusion blocks all Meta retargeting</div>
+<div class="gap-evidence">Client media policy. L30 confirms 2.0% BoF. — Push for 30-60 day reduction at QBR.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">MG-3</span><span class="gap-priority priority-p1">High</span><span class="gap-tag">Client (JJ) + Brandon</span></div>
+<div class="gap-desc">No max spend caps on CBO test ad sets</div>
+<div class="gap-evidence">J55 ran to $11K/day at poor efficiency. Recurring issue. — ABO or max caps recommended.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">MG-4</span><span class="gap-priority priority-p2">Medium</span><span class="gap-tag">Client (JJ)</span></div>
+<div class="gap-desc">ASC spend unlabeled between agencies</div>
+<div class="gap-evidence">~2/3 ASC was NRTV dragging up blended CAC. — Partially mitigated by NRTV exit.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">MG-5</span><span class="gap-priority priority-p2">Medium</span><span class="gap-tag">Brandon → JJ</span></div>
+<div class="gap-desc">KPI target unclear ($130 vs $302 iCAC)</div>
+<div class="gap-evidence">Target shifted multiple times with measurement changes. — Reconfirm at QBR.</div>
+</div>
+</div>
+<div class="tab-content" id="tab-workflow-gaps">
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-1</span><span class="gap-priority priority-p1">Critical</span><span class="gap-tag">Internal Ops</span></div>
+<div class="gap-desc">TS creative not differentiated from client output</div>
+<div class="gap-evidence">Client context: competing in client's strength lane. — Entire wallet share at risk. Shift to carousels, data-driven statics, comedy/skit.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-2</span><span class="gap-priority priority-p1">High</span><span class="gap-tag">Client</span></div>
+<div class="gap-desc">Brand vs. growth team misalignment at client</div>
+<div class="gap-evidence">Alex wants novelty, Annie rejects. No unified brief. — Each rejection costs ~1 week. QBR topic.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-3</span><span class="gap-priority priority-p1">High</span><span class="gap-tag">Client</span></div>
+<div class="gap-desc">TS has only $38K on Greenlight brand page vs $1.13M others</div>
+<div class="gap-evidence">L30 page data. TS limited to ~15% of audience via whitelist. — Request brand page access for top TS creative.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-4</span><span class="gap-priority priority-p1">High</span><span class="gap-tag">Client + Jeff</span></div>
+<div class="gap-desc">Client resistance to Deal/BoF blocks price-justification testing</div>
+<div class="gap-evidence">Consumer: 'why pay when free?' is #1 objection. Client rejected deal-heavy. — Frame as 'value justification' not 'deal creative.' Cap 15-20%.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-5</span><span class="gap-priority priority-p1">High</span><span class="gap-tag">Client (JJ)</span></div>
+<div class="gap-desc">MTA/backend data unreliable</div>
+<div class="gap-evidence">Rockerbox invalidated, Northbeam late-stage, OP sheet bugged. — Use iCPA as proxy. Acknowledge uncertainty.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-6</span><span class="gap-priority priority-p2">Medium</span><span class="gap-tag">Client (Alex)</span></div>
+<div class="gap-desc">NRTV departure unconfirmed</div>
+<div class="gap-evidence">3 new ads launched post-cutoff. Changes entire strategic orientation. — Confirm ASAP.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-7</span><span class="gap-priority priority-p2">Medium</span><span class="gap-tag">Internal Ops</span></div>
+<div class="gap-desc">Editing quality / production pipeline below standard</div>
+<div class="gap-evidence">TJ and Melissa flag editor unfamiliarity with winning styles. — Weekly top-performer shares to editors. Monthly syncs.</div>
+</div>
+<div class="gap-card">
+<div class="gap-header"><span class="gap-id">WG-8</span><span class="gap-priority priority-p2">Medium</span><span class="gap-tag">Client</span></div>
+<div class="gap-desc">Compliance/legal review bottleneck at client</div>
+<div class="gap-evidence">2-3 weeks missed activations in Dec. Jason sole reviewer. — Partially resolved — Alex can review low-risk.</div>
+</div>
+</div>
+</div></div>
+
+<div class="page-section" id="page-competitors">
+<div class="output-section">
+<div class="output-label">Source Document</div>
+<div class="output-title">Competitor Landscape Report</div>
+<p style="color:var(--text-dim); margin-bottom:8px; font-size:0.85rem;">Cross-competitor creative intelligence for the Kids' Banking & Financial Education category. Pathmatics data, March 9 – April 7, 2026.</p>
+<div class="callout callout-info">
+<strong>Key finding:</strong> Greenlight's two direct competitors — Chase First Banking ($30K) and Acorns Early ($16K) — are spending almost nothing on paid DR creative. The kids' banking sub-category is essentially uncontested in paid social. Greenlight enters a landscape where its closest competitors haven't shown up.
+</div>
+
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Category Norms </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Visual:</strong> Text-Heavy/Graphic dominates (41% of $37M). Elevated Brand style (49%). The category looks expensive and polished — not native-feeling.</p>
+<p><strong>Messaging:</strong> Outcome 54%, Deal 31%, Problem only 16%. Problem is underrepresented — creating a strategic opening for Greenlight.</p>
+<p><strong>Voice:</strong> V-BRAND dominates (75%). Zero V-FOUNDER across entire dataset.</p>
+<p><strong>Funnel:</strong> MoF dominates (76%). ToF severely underrepresented (6%). BoF 18% — mostly Deal-driven insurance/tax.</p>
+<p><strong>Social proof:</strong> Only 9% of category uses it. Zero in kids' banking. Greenlight's 4.8★ rating and 6M+ families are unused ammunition.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Chase First Banking — est. $29,904 </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Strategy:</strong> Barely in the paid game. $30K is a test budget, not competitive. 5 ads, all MoF, all "parent gets notification about kid's purchase" scenarios.</p>
+<p><strong>Creative:</strong> Dad-gets-notification talking head + kid-buys-something-silly unboxing. One demographic, one scenario, one benefit. Narrow but competent.</p>
+<p><strong>Threat level:</strong> Low spend today, but <strong>Chase is free and runs on Greenlight's technology.</strong> If Chase scales spend, they attack Greenlight's price justification.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Acorns Early — est. $16,018 </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Strategy:</strong> Most generic possible kids' fintech creative. Feature lists on branded backgrounds. $16K/month suggests minimal prioritization.</p>
+<p><strong>Creative:</strong> 100% Outcome, 100% MoF, zero UGC, zero humor, zero emotional storytelling.</p>
+<p><strong>Threat level:</strong> None currently. But Acorns has brand recognition from adult investing app.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Rocket Money — est. $1,508,058 (Adjacent) </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Why it matters:</strong> Rocket Money is the closest analogue to what Greenlight's most differentiated creative could look like. They own Problem + Comedy in personal finance.</p>
+<p><strong>Adaptable:</strong> "Comment Bubble as Hook" format ($482K) → parent responding to "Wait, your kid asked to do MORE chores??" The comedic narrative approach ($1.0M) → Greenlight's "cash round-trip absurdity."</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Monarch — est. $1,467,613 (Adjacent) </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Why it matters:</strong> Monarch owns the empathetic problem reframe: "You're not bad with money. You just need better tools." $999K on split-screen format.</p>
+<p><strong>Adaptable:</strong> "You're not bad at teaching your kids about money. Nobody taught you either. But now there's a tool that does." Directly maps to Greenlight's parenting context.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>White Space — Nobody Is Doing This </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="table-wrap"><table>
+<tr><th>Dimension</th><th>What's Missing</th><th>Opportunity</th></tr>
+<tr><td>Voice</td><td>V-FOUNDER — $0 across entire set</td><td style="color:var(--win)">HIGH</td></tr>
+<tr><td>Format</td><td>Situational Video Skits — absent</td><td style="color:var(--win)">HIGH</td></tr>
+<tr><td>Format</td><td>UGC Testimonial for kids' banking — zero</td><td style="color:var(--win)">HIGH</td></tr>
+<tr><td>Motivator</td><td>Problem in kids' banking — near zero</td><td style="color:var(--win)">HIGH</td></tr>
+<tr><td>Audience</td><td>Grandparent targeting — zero</td><td style="color:var(--warn)">MED-HIGH</td></tr>
+<tr><td>Audience</td><td>Father-specific creative — zero</td><td style="color:var(--warn)">MEDIUM</td></tr>
+<tr><td>Funnel</td><td>ToF and BoF for kids' banking — zero</td><td style="color:var(--win)">HIGH</td></tr>
+<tr><td>Social Proof</td><td>Ratings/awards — 9% category, 0% kids' banking</td><td style="color:var(--win)">HIGH</td></tr>
+<tr><td>Mechanism</td><td>"Chase runs on Greenlight's technology"</td><td style="color:var(--win)">HIGH</td></tr>
+</table></div>
+</div></div></div>
+</div></div>
+
+<div class="page-section" id="page-research">
+<div class="output-section">
+<div class="output-label">Source Document</div>
+<div class="output-title">Consumer Intelligence Report</div>
+<p style="color:var(--text-dim); margin-bottom:8px; font-size:0.85rem;">Complete consumer intelligence synthesis — App Store reviews, Trustpilot, BBB, Reddit, review sites, competitor analysis. April 2026.</p>
+<div class="comp-context" style="margin-bottom:24px;">
+<strong>Key thesis:</strong> Parents don't buy Greenlight for a debit card — they buy it because it makes their kid <em>act differently around money</em>. The chore system is the stealth killer feature. <strong>Most dangerous blind spot:</strong> ignoring the free-competitor pricing objection. Chase First Banking runs on Greenlight's own technology for $0.
+</div>
+
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>1. Product Overview </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Core offering:</strong> Subscription-based family finance platform centered on a kids/teen Mastercard debit card with parental controls, chore-based allowance automation, savings goal tracking, investing (stocks/ETFs with parent approval), financial literacy games, and family safety features (GPS, SOS, crash detection). Plans: Core ($5.99/mo), Max ($10.98/mo), Infinity ($15.98/mo), Family Shield ($19.98-$24.98/mo). Covers up to 5 kids and 2 parents.</p>
+<p><strong>Differentiation:</strong> Moderate. Most feature-rich product in kids' banking, but core function (kids' debit card) is replicated by free competitors. Differentiation lives in ecosystem depth — investing + chores + savings + safety + education in one app.</p>
+<p><strong>Consideration level:</strong> Medium. Parents research before committing to a recurring subscription involving their child's finances. Reddit threads, comparison articles, Trustpilot checks are common.</p>
+<p><strong>Primary motivator hypothesis:</strong> Problem Motivator is the door-opener ("I can't teach my kids about money / I never have cash"). Outcome Motivator is the conversion fuel ("My kid is becoming financially responsible"). Deal Motivator needed defensively given free competitors but should never lead.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>2. Executive Summary </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Biggest creative opportunity:</strong> The "cash is dead but allowance isn't" tension. Every parent has experienced the moment when their kid asks for money and they don't have cash. This is universal, acute, relatable — and it opens the door to everything else Greenlight does.</p>
+<p><strong>Most dangerous blind spot:</strong> Ignoring the free-competitor pricing objection. Chase, Step, Capital One MONEY all offer core features for $0. Parents doing 30 seconds of research will find free alternatives. Creative must pre-emptively justify why Greenlight's ecosystem is worth $5.99-$15.98/mo.</p>
+<p><strong>2-3 consumer truths that should anchor creative:</strong></p>
+<p>1. Parents don't buy Greenlight for a debit card — they buy it because their kid <strong>acts differently around money</strong>.</p>
+<p>2. The chore system is the stealth killer feature. Kids <strong>asking</strong> to do chores and <strong>negotiating</strong> pay rates.</p>
+<p>3. The app functions as a parenting tool that works when parents aren't in the room — real-time notifications, spending controls, and forced trade-offs teach lessons passively.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>3. Surprise Factors (Hook Fuel) </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<h4>High TAM Surprises</h4>
+<p><strong>"The #1 kids' banking app is also secretly a chore app — and kids actually ask to do MORE chores."</strong> Violates the assumption that kids resist chores. Hook: benefit/curiosity. Fuels Outcome Motivator.</p>
+<p><strong>"Your kid's school is about to require financial literacy — and you're not ready."</strong> 29 states now mandate financial literacy education. Most parents don't know this. Hook: fear/urgency.</p>
+<p><strong>"Chase's free kids' banking card? It literally runs on Greenlight's technology."</strong> Reframes Greenlight from "one option among many" to "the platform banks themselves trust."</p>
+<p><strong>"Your kid will form their money habits by age 12 — whether you teach them or not."</strong> Creates urgency by reframing inaction as an active choice.</p>
+<h4>Niche Surprises</h4>
+<p><strong>"A great-grandmother uses Greenlight to send allowance from three states away."</strong> Real Trustpilot review. Violates the nuclear-family assumption.</p>
+<p><strong>"Kids on Greenlight invested $6 million in the S&P 500 last year."</strong> Violates assumption kids can't meaningfully invest.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>4. Consumer Vocabulary Bank </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<h4>Problem Language</h4>
+<p>"I never have cash" — "Each month, I was giving my children cash only to have them give the cash back to make an online purchase with my debit card."</p>
+<p>"My kid has no concept of what things cost." — "didn't understand the value of a dollar"</p>
+<p>"I forgot to pay allowance again." — "It was the only way to stay consistent"</p>
+<p>"She just asks me to buy things and I say yes or no — there's no lesson in that."</p>
+<h4>Outcome Language</h4>
+<p>"From a kid who didn't understand the value of a dollar, to a financially responsible tween."</p>
+<p>"My son is eager to do chores and has quickly learned to request new chores and suggest amounts he thinks he should get paid, lol."</p>
+<p>"She has chosen to open the savings part of Greenlight on her own. I love that initiative."</p>
+<p>"My kids became measurably less impulsive once they could see their own balance declining."</p>
+<h4>Objection Language</h4>
+<p>"$10 a month can go a long way with investing. The monthly fee is half of my daughter's monthly allowance."</p>
+<p>"Not worth it for a service you can get for free using one of your banking services."</p>
+<p>"They continued taking monthly fees from me for 2 years after I cancelled."</p>
+<p>"Great idea poorly executed." — recurring 3-star sentiment</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>5. Audience Map </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Audience 1:</strong> "My kid keeps asking me to buy stuff and I always say yes or no with no lesson." The parent whose cashless lifestyle makes money invisible. <em>Broad TAM.</em></p>
+<p><strong>Audience 2:</strong> "I never have cash for allowance and the envelope system fell apart." The organized parent whose manual system failed. <em>Broad TAM.</em></p>
+<p><strong>Audience 3:</strong> "My teen is going on a trip and I need to give them money I can monitor." Acute, time-bound need. <em>Medium TAM, high urgency.</em></p>
+<p><strong>Audience 4:</strong> "I want my kid to start learning about investing early." Financially engaged parent. <em>Niche TAM.</em></p>
+<p><strong>Audience 5:</strong> "Grandparent who wants to contribute from a distance." Underserved. <em>Medium-niche TAM.</em></p>
+<p><strong>UNTAPPED:</strong> "Parent whose kid just got their first phone (ages 10-12)." Phone = apps = wanting to buy things online. No competitor targets this moment.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>6-7. Motivator Taxonomy & Anti-Competitors </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<h4>Problem Motivators</h4>
+<p><strong>"I never have cash for allowance"</strong> — universal, chronic. Strong standalone hook.</p>
+<p><strong>"My kid thinks money is infinite"</strong> — tap-to-pay culture. Broad TAM, strong fear angle.</p>
+<p><strong>"Nobody taught me about money"</strong> — generational guilt. Deep, identity-level. Needs Outcome proof to resolve.</p>
+<h4>Outcome Motivators</h4>
+<p><strong>"My kid actually wants to do chores now"</strong> — sounds too good to be true, which makes it compelling. Multiple testimonials.</p>
+<p><strong>"My kid is becoming financially responsible on their own"</strong> — identity-level for parents. Emotional peak of the Greenlight story.</p>
+<h4>Anti-Competitor Triggers</h4>
+<p><strong>"Cash allowance is impossible to track"</strong> — switching from physical cash. Universal.</p>
+<p><strong>"The bank account had no parental controls"</strong> — switching from youth checking accounts.</p>
+<p><strong>"The free option was too basic"</strong> — switching from Chase/Capital One. Ecosystem depth wins.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>8. Barriers to Purchase </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Barrier 1 — "What will I get?"</strong> Confusion about day-to-day experience. Response: 60-second product demo.</p>
+<p><strong>Barrier 2 — "How does it work?"</strong> Setup friction. Response: "Card arrives in days, app takes 5 minutes."</p>
+<p><strong>Barrier 3 — "Is this the smart decision?"</strong> Free alternatives found within 2 minutes. <em>Dealbreaker for price-sensitive.</em> Response: ecosystem reframe + $1.20/kid/month.</p>
+<p><strong>Barrier 6 — "Can I afford it?"</strong> $5.99/mo vs. free. <em>Dealbreaker.</em> Response: price anchoring — less than one kids' meal, $72/year vs. $1,819/year cost of illiteracy.</p>
+<p><strong>Barrier 7 — "How risky is it?"</strong> Cancellation horror stories (20 reviews). <em>Dealbreaker for researchers.</em> Response: "Cancel anytime, no fees, first month free."</p>
+<p><strong>Barrier 8 — "Why should I trust this?"</strong> Fraud complaints, BBB "B" rating, CFPB investigation. Response: "6.5 million parents trust Greenlight. FDIC-insured. 4.8★ from 479K ratings."</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>9-10. Competitive Landscape & Strategy </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<h4>Direct Competitors</h4>
+<p><strong>Chase First Banking (FREE):</strong> Powered by Greenlight technology. Lacks investing, literacy games, multi-parent, store-level controls. "Chase runs on Greenlight's tech" is the strongest credibility asset.</p>
+<p><strong>Step (FREE):</strong> Ages 13+. Only competitor that builds actual credit history. No parental controls, no chores, no investing.</p>
+<p><strong>Acorns Early ($5-10/mo):</strong> Per-child pricing weakness. Greenlight wins for 3+ kid families.</p>
+<p><strong>Capital One MONEY (FREE):</strong> No chores, no investing, no education. "It's free and has more ATMs."</p>
+<h4>Market Context</h4>
+<p>Only 15-25% of 33M U.S. families use a dedicated kids' fintech — 75% headroom remains. 29 states now mandate financial literacy education. Greenlight's B2B2C strategy (200+ bank partners) is the most significant structural moat.</p>
+<h4>Top 5 Concept Directions</h4>
+<p>1. "The Cash Round-Trip" (Problem → Solution Demo) — comedy skit</p>
+<p>2. "My Kid Actually ASKED to Do Chores" (Outcome Testimonial)</p>
+<p>3. "The Window Is Closing" (Urgency + Education)</p>
+<p>4. "Same Technology, 10x the Features" (Anti-Competitor)</p>
+<p>5. "Grandma's New Favorite App" (Gifting/Connection)</p>
+</div></div></div>
+</div></div>
+
+<div class="page-section" id="page-client">
+<div class="output-section">
+<div class="output-label">Source Document</div>
+<div class="output-title">Client Context Report</div>
+<p style="color:var(--text-dim); margin-bottom:8px; font-size:0.85rem;">Sources: #revenue-greenlight Slack (6 months), QBR Prep Call (Mar 12), Podsey Scheme P1s (Mar 10), Melissa/TJ Biweekly (Apr 7), B&L PDF, Web Search. Generated April 9, 2026.</p>
+<div class="callout callout-danger" style="margin-bottom:24px;">
+<strong>Account status: 🔴 RED.</strong> WS crashed to 14%, spend at $54K, down from 40%+ peak. Performance flipped from beating internal to 14% worse. No working UGC. Client outperforming on every video format.
+</div>
+
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Client Direction & Preferences </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Client demands "newness" but rejects unfamiliar formats.</strong> Alex (paid social) asked for "something new and very interesting," but Annie (brand/legal) rejected a stick figure concept without detailed rationale. Narrow creative window — novelty desired but must stay within brand tone.</p>
+<p><strong>Shift from features to positive outcome-focused messaging.</strong> Melissa and Jeff identified this direction in Dec 2025. All new concepts should inform through chore outcomes and behavioral outcomes.</p>
+<p><strong>Volume target: 120+ assets/month (~30 jobs).</strong> Ambitious pace requiring production pipeline alignment.</p>
+<p><strong>Client has rejected deal/promo-focused creative.</strong> Jackson over-indexed on BoF deal concepts. Sprint plans should cap BoF/deal at ~15-20% of output.</p>
+<p><strong>Brand & growth team misalignment is recurring.</strong> Alex (growth) wants aggressive testing. Annie (legal) enforces brand guidelines strictly. Not well-coordinated internally.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Performance Signals </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>L7 performance early April: RED.</strong> Spend $54K, WS 14%, down from $118K and 30%+. A creative crisis.</p>
+<p><strong>Carousels are TS's only differentiated format.</strong> J66 and J79 (chore outcomes carousels) consistently called out as on-target. More carousel variants are high-priority.</p>
+<p><strong>Chore outcomes is the one working motivator.</strong> Consistent since December. "Better allowance" identified as a motivator gap.</p>
+<p><strong>No working UGC.</strong> Yvonne's most recent update: "No working UGCs. Client is outperforming here."</p>
+<p><strong>Dad persona unlocked via J75.</strong> Single biggest strategic win — performs at target on MTA. QBR headline. More dad-focused creative needed.</p>
+<p><strong>Statics outperform video on this account.</strong> J10V1C (urgency), J45 (news flash), J61 (urgency), J64 (WoT) all in current performer set.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Rejected/Restricted Approaches </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p>• <strong>Stick figures</strong> — rejected by Annie, reason unclear. Alex approved. Follow up for clarification.</p>
+<p>• <strong>"Accusatory" messaging</strong> — rejected. Can't shame non-Greenlight parents.</p>
+<p>• <strong>"Empowerment" concerns</strong> — flagged by client. Use cautiously.</p>
+<p>• <strong>Deal-first sprint plans</strong> — explicitly rejected.</p>
+<p>• <strong>Gift language</strong> — prohibited (CARD Act). Can't call debit card a "gift."</p>
+<p>• <strong>Fear-mongering and clickbait</strong> — banned. No shock value, no "what they don't want you to know" hooks.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Market Updates & Opportunities </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>Safe Family GPS device launched March 17, 2026.</strong> First physical product ($59.95 + $5.99/mo). New safety-focused creative angle.</p>
+<p><strong>April = Financial Literacy Month + Mathnasium partnership.</strong> Topical hook window for financial literacy creative.</p>
+<p><strong>B2B expansion:</strong> Multiple credit unions now offer free Greenlight subscriptions.</p>
+<p><strong>Fed Section 530A Account launching July 2026.</strong> Major creative messaging angle for Q3.</p>
+<p><strong>Current remains main free alternative.</strong> Greenlight's edge is feature depth vs. Current's $0 price.</p>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Non-Creative Gaps (11 Items) </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<div class="table-wrap"><table>
+<tr><th>#</th><th>Gap</th><th>Category</th><th>Severity</th><th>Owner</th></tr>
+<tr><td>1</td><td><strong>CBO v2 throttling test spend</strong> — $25/concept</td><td>Media</td><td style="color:var(--danger)">Critical</td><td>Client + Darlene</td></tr>
+<tr><td>2</td><td>NRTV ads launched post-bakeoff cutoff</td><td>Client</td><td style="color:var(--danger)">Critical</td><td>Darlene → Alex</td></tr>
+<tr><td>3</td><td>180-day visitor exclusion blocks retargeting</td><td>Media</td><td style="color:var(--p1)">High</td><td>Client + Brandon</td></tr>
+<tr><td>4</td><td>No max spend caps on CBO test ad sets</td><td>Media</td><td style="color:var(--p1)">High</td><td>Client + Brandon</td></tr>
+<tr><td>5</td><td>MTA/backend data unreliable</td><td>Workflow</td><td style="color:var(--p1)">High</td><td>Client (JJ)</td></tr>
+<tr><td>6</td><td>Compliance/legal review bottleneck</td><td>Client</td><td style="color:var(--p1)">High</td><td>Client (Jason/Annie)</td></tr>
+<tr><td>7</td><td>Brand vs growth team misalignment</td><td>Client</td><td style="color:var(--warn)">Medium</td><td>Client (Alex/Annie)</td></tr>
+<tr><td>8</td><td>ASC spend unlabeled between agencies</td><td>Media</td><td style="color:var(--warn)">Medium</td><td>Client (JJ)</td></tr>
+<tr><td>9</td><td>Variant-by-variant reporting unsustainable</td><td>Workflow</td><td style="color:var(--warn)">Medium</td><td>Internal</td></tr>
+<tr><td>10</td><td>Client responsiveness gaps during PTO</td><td>Client</td><td>Low</td><td>Darlene</td></tr>
+<tr><td>11</td><td>Editing quality / pipeline capacity</td><td>Internal</td><td style="color:var(--warn)">Medium</td><td>Melissa + Francisco</td></tr>
+</table></div>
+</div></div></div>
+<div class="collapse-section">
+<div class="collapse-header" onclick="toggleCollapse(this)">
+<h3>Key Contradictions </h3><span class="collapse-arrow">▾</span>
+</div>
+<div class="collapse-body"><div class="collapse-content prose">
+
+<p><strong>CPA target: $130 vs $200 vs $302.</strong> Target shifted as measurement moved from backend CAC to MTA iCAC. Most recent: $302 (Jan 26). Materially changes what "winning" looks like.</p>
+<p><strong>Is NRTV out?</strong> Podsey P1s say yes. Brandon found 3 new ads post-cutoff. Unresolved.</p>
+<p><strong>Client happiness: Stable vs Declining.</strong> Jan-Feb showed ✅. Mar-Apr 4-week collapse puts relationship at risk.</p>
+</div></div></div>
+</div></div>
+
+</div><!-- container -->
+<script>
+function toggleCollapse(header) {
+    const section = header.parentElement;
+    section.classList.toggle('open');
+}
+function showPage(id) {
+    document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    window.scrollTo(0, 0);
+}
+function showTab(id, btn) {
+    const parent = btn.closest('.output-section') || btn.closest('.page-section');
+    parent.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+}
+</script>
+</body>
+</html>
